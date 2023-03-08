@@ -536,22 +536,6 @@ const NavigationSecreen = ({navigation}) => {
           33 secreen
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('DateTime')}
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#df0300',
-          width: '50%',
-          height: 30,
-          borderRadius: 7,
-          marginTop: 20,
-          elevation: 2,
-        }}>
-        <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
-          34 secreen
-        </Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 };

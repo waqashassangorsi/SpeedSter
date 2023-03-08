@@ -89,7 +89,7 @@ const GiftVoucher = () => {
                     style={{
                       fontWeight: 'bold',
                       fontSize: 16,
-                      color: colors.primary,
+                      color: colors.secondary,
                     }}>
                     14th February
                   </Text>
@@ -99,7 +99,7 @@ const GiftVoucher = () => {
                 </Text>
                 <TouchableOpacity
                   style={{
-                    backgroundColor: '#C70118',
+                    backgroundColor: colors.secondary,
                     width: '60%',
                     alignItems: 'center',
                     padding: 10,
@@ -115,11 +115,11 @@ const GiftVoucher = () => {
                 <Text
                   style={{
                     textAlign: 'center',
-                    color: 'green',
+                    color: '#009F0B',
                     fontSize: 16,
                     fontWeight: 'bold',
                   }}>
-                  Promo Applied
+                  PROMO APPLIED
                 </Text>
               </View>
               {/* <View>

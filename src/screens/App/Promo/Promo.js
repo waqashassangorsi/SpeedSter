@@ -37,7 +37,7 @@ const Promo = () => {
       <Badge
         size={100}
         status="warning"
-        value=" "
+        value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,

@@ -39,7 +39,7 @@ const Wallet = () => {
       <Badge
         size={100}
         status="warning"
-        value=" "
+        value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,
@@ -181,7 +181,6 @@ const Wallet = () => {
           style={{
             alignItems: 'flex-end',
             flex: 1,
-            paddingHorizontal: 5,
             justifyContent: 'flex-end',
             paddingBottom: 80,
           }}>

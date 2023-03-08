@@ -69,7 +69,7 @@ const AddParcel = () => {
       <ScrollView>
         <View style={{paddingHorizontal: 10}}>
           <Text style={{fontSize: 18, color: 'black', paddingTop: 10}}>
-            Parcel Image<Text style={{color: colors.primary}}>*</Text>
+            Parcel Image<Text style={{color: colors.secondary}}>*</Text>
           </Text>
           <View style={{flexDirection: 'row', marginVertical: 20}}>
             <Image
@@ -92,7 +92,7 @@ const AddParcel = () => {
             </View>
           </View>
           <Text style={{fontSize: 18, color: 'black', paddingTop: 12}}>
-            Parcel Description<Text style={{color: colors.primary}}>*</Text>
+            Parcel Description<Text style={{color: colors.secondary}}>*</Text>
           </Text>
           <TextInput
             placeholder="Parcel name and detail"
@@ -115,7 +115,7 @@ const AddParcel = () => {
                 style={{
                   fontSize: 13,
                   marginLeft: 3,
-                  color: colors.primary,
+                  color: colors.secondary,
                   fontWeight: 'bold',
                 }}>
                 Save
@@ -210,11 +210,11 @@ const AddParcel = () => {
               justifyContent: 'space-evenly',
               position: 'absolute',
               bottom: 70,
-              left: 20,
+              left: 15,
             }}>
             <TouchableOpacity
               style={{
-                width: '45%',
+                width: '46%',
                 borderColor: colors.primary,
                 borderWidth: 1,
                 justifyContent: 'center',
@@ -233,8 +233,8 @@ const AddParcel = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={{
-                width: '45%',
-                backgroundColor: colors.primary,
+                width: '46%',
+                backgroundColor: colors.secondary,
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 20,

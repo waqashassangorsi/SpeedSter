@@ -79,7 +79,7 @@ const LostAccount = () => {
               width: '50%',
               height: 30,
               borderRadius: 20,
-              marginTop: 10,
+              marginTop: 15,
               elevation: 8,
               borderRadius: 3,
               shadowColor: '#000',
@@ -103,7 +103,13 @@ const LostAccount = () => {
             marginBottom: 10,
           }}>
           <Text style={{color: 'black'}}>Already have an account?</Text>
-          <Text style={{color: '#df0300', fontWeight: 'bold', fontSize: 16}}>
+          <Text
+            style={{
+              color: '#df0300',
+              fontWeight: 'bold',
+              fontSize: 16,
+              paddingLeft: 5,
+            }}>
             Sign In
           </Text>
         </View>
@@ -122,7 +128,7 @@ const styles = StyleSheet.create({
   input: {
     borderBottomWidth: 1,
     borderBottomColor: 'black',
-    marginHorizontal: 10,
+    marginHorizontal: 30,
 
     borderRadius: 3,
 
@@ -135,5 +141,5 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
 
-  lock1: {position: 'absolute', top: 15, left: 20},
+  lock1: {position: 'absolute', top: 15, left: 40},
 });

@@ -107,7 +107,7 @@ const PinLocation = () => {
             borderBottomColor: '#ccc',
             borderBottomWidth: 1,
           }}>
-          <Text style={{color: 'black', fontSize: 18}}>
+          <Text style={{color: 'black', fontSize: 14, fontWeight: 'bold'}}>
             Select your pin location
           </Text>
         </View>
@@ -153,14 +153,14 @@ const PinLocation = () => {
         </View>
         <TouchableOpacity
           style={{
-            backgroundColor: colors.primary,
+            backgroundColor: colors.secondary,
             marginTop: 30,
             justifyContent: 'center',
             alignItems: 'center',
             marginHorizontal: 20,
-            padding: 8,
+            padding: 10,
             marginBottom: 400,
-            borderRadius: 20,
+            borderRadius: 25,
           }}>
           <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
             Confirm pin location

@@ -17,6 +17,7 @@ import colors from '../../../theme/colors';
 import BottomTab from '../../../components/BottomTab';
 import {blacklogo, Persons, whatsapp} from '../../../assets';
 import SelectDropdown from 'react-native-select-dropdown';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const Data = [1, 2];
 
@@ -102,7 +103,7 @@ const Activities = () => {
       <Badge
         size={100}
         status="warning"
-        value=" "
+        value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,
@@ -111,91 +112,91 @@ const Activities = () => {
           scaleY: 0.6,
         }}
       />
-
-      <View
-        style={{
-          alignItems: 'center',
-          marginVertical: 10,
-        }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
-          Activities
-        </Text>
-        <Entypo
-          name={'cross'}
-          size={30}
-          color={'black'}
-          style={{position: 'absolute', right: 7}}
-        />
-      </View>
-      <View
-        style={{
-          marginHorizontal: 15,
-          borderWidth: 1,
-          borderRadius: 25,
-          borderColor: colors.secondary,
-          padding: 12,
-          marginVertical: 15,
-        }}>
-        <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold'}}>
-          Recent Delivery
-        </Text>
-        <View style={{position: 'absolute', right: 0}}>
-          <SelectDropdown
-            data={countries}
-            // defaultValueByIndex={1}
-            // defaultValue={'Egypt'}
-            onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index);
-            }}
-            defaultButtonText={'Last 15 Days'}
-            buttonTextAfterSelection={(selectedItem, index) => {
-              return selectedItem;
-            }}
-            rowTextForSelection={(item, index) => {
-              return item;
-            }}
-            buttonStyle={styles.dropdown1BtnStyle}
-            buttonTextStyle={styles.dropdown1BtnTxtStyle}
-            renderDropdownIcon={isOpened => {
-              return (
-                <FontAwesome
-                  name={isOpened ? 'chevron-up' : 'chevron-down'}
-                  color={'white'}
-                  size={18}
-                />
-              );
-            }}
-            dropdownIconPosition={'right'}
-            dropdownStyle={styles.dropdown1DropdownStyle}
-            rowStyle={styles.dropdown1RowStyle}
-            rowTextStyle={styles.dropdown1RowTxtStyle}
+      <ScrollView>
+        <View
+          style={{
+            alignItems: 'center',
+            marginVertical: 10,
+          }}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            Activities
+          </Text>
+          <Entypo
+            name={'cross'}
+            size={30}
+            color={'black'}
+            style={{position: 'absolute', right: 7}}
           />
         </View>
-      </View>
-      <View
-        style={{
-          marginTop: 15,
-          borderColor: colors.secondary,
-          borderWidth: 0.3,
-          paddingVertical: 20,
-        }}>
-        <FlatList
-          data={Data}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          ItemSeparatorComponent={ItemDivider}
-        />
-      </View>
-      <View
-        style={{
-          alignItems: 'flex-end',
-          flex: 1,
-          paddingHorizontal: 5,
-          justifyContent: 'flex-end',
-          paddingBottom: 80,
-        }}>
-        <Image source={whatsapp} style={{width: 90, height: 90}} />
-      </View>
+        <View
+          style={{
+            marginHorizontal: 15,
+            borderWidth: 1,
+            borderRadius: 25,
+            borderColor: colors.secondary,
+            padding: 12,
+            marginVertical: 15,
+          }}>
+          <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold'}}>
+            Recent Delivery
+          </Text>
+          <View style={{position: 'absolute', right: 0}}>
+            <SelectDropdown
+              data={countries}
+              // defaultValueByIndex={1}
+              // defaultValue={'Egypt'}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index);
+              }}
+              defaultButtonText={'Last 15 Days'}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                return selectedItem;
+              }}
+              rowTextForSelection={(item, index) => {
+                return item;
+              }}
+              buttonStyle={styles.dropdown1BtnStyle}
+              buttonTextStyle={styles.dropdown1BtnTxtStyle}
+              renderDropdownIcon={isOpened => {
+                return (
+                  <FontAwesome
+                    name={isOpened ? 'chevron-up' : 'chevron-down'}
+                    color={'white'}
+                    size={18}
+                  />
+                );
+              }}
+              dropdownIconPosition={'right'}
+              dropdownStyle={styles.dropdown1DropdownStyle}
+              rowStyle={styles.dropdown1RowStyle}
+              rowTextStyle={styles.dropdown1RowTxtStyle}
+            />
+          </View>
+        </View>
+        <View
+          style={{
+            marginTop: 15,
+            borderColor: colors.secondary,
+            borderWidth: 0.3,
+            paddingVertical: 20,
+          }}>
+          <FlatList
+            data={Data}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            ItemSeparatorComponent={ItemDivider}
+          />
+        </View>
+        <View
+          style={{
+            alignItems: 'flex-end',
+            flex: 1,
+            marginTop: 90,
+            paddingBottom: 80,
+          }}>
+          <Image source={whatsapp} style={{width: 90, height: 90}} />
+        </View>
+      </ScrollView>
       <BottomTab />
     </View>
   );

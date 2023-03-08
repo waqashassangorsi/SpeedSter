@@ -112,8 +112,8 @@ const ParcelDetail = () => {
             alignItems: 'center',
             paddingVertical: 15,
           }}>
-          <Text style={{color: 'black', fontSize: 18}}>
-            Select payment method{' '}
+          <Text style={{color: 'black', fontSize: 14}}>
+            Select payment method
           </Text>
         </View>
         <View>

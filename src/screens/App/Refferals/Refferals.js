@@ -37,7 +37,7 @@ const Refferals = () => {
       <Badge
         size={100}
         status="warning"
-        value=" "
+        value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,
@@ -147,7 +147,7 @@ const Refferals = () => {
               }}>
               Tap to copy
             </Text>
-            <View style={{alignItems: 'center'}}>
+            <View style={{alignItems: 'center', marginTop: 10}}>
               <TouchableOpacity
                 style={{
                   flexDirection: 'row',

@@ -47,7 +47,7 @@ const Contact = () => {
       <Badge
         size={100}
         status="warning"
-        value=" "
+        value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,
@@ -82,7 +82,7 @@ const Contact = () => {
             <View style={{width: '47%'}}>
               <Text
                 style={{
-                  paddingLeft: 5,
+                  paddingLeft: 2,
                   marginVertical: 10,
                   color: 'black',
                   fontSize: 16,
@@ -94,7 +94,7 @@ const Contact = () => {
             <View style={{width: '47%'}}>
               <Text
                 style={{
-                  paddingLeft: 5,
+                  paddingLeft: 2,
                   marginVertical: 10,
                   color: 'black',
                   fontSize: 16,
@@ -107,7 +107,7 @@ const Contact = () => {
           <View style={{}}>
             <Text
               style={{
-                paddingLeft: 5,
+                paddingLeft: 2,
                 marginVertical: 20,
                 color: 'black',
                 fontSize: 16,
@@ -119,7 +119,7 @@ const Contact = () => {
           <View style={{}}>
             <Text
               style={{
-                paddingLeft: 5,
+                paddingLeft: 2,
                 marginVertical: 20,
                 color: 'black',
                 fontSize: 16,
@@ -253,9 +253,8 @@ const Contact = () => {
           style={{
             alignItems: 'flex-end',
             flex: 1,
-            paddingHorizontal: 5,
             justifyContent: 'flex-end',
-            paddingBottom: 80,
+            paddingBottom: 70,
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />
         </View>

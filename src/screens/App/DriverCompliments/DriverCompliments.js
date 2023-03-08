@@ -40,7 +40,7 @@ const DriverCompliments = () => {
       <Badge
         size={100}
         status="warning"
-        value=" "
+        value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,
@@ -81,7 +81,7 @@ const DriverCompliments = () => {
           style={{
             flexDirection: 'row',
             paddingHorizontal: 10,
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
             paddingTop: 10,
           }}>
           <View
@@ -133,7 +133,7 @@ const DriverCompliments = () => {
               1 Year
             </Text>
             <Text style={{fontSize: 16, color: 'black', textAlign: 'center'}}>
-              Rating & Reviews
+              Driving since
             </Text>
           </View>
         </View>
@@ -187,9 +187,8 @@ const DriverCompliments = () => {
           style={{
             alignItems: 'flex-end',
             flex: 1,
-            paddingHorizontal: 5,
             justifyContent: 'flex-end',
-            paddingBottom: 80,
+            paddingBottom: 10,
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />
         </View>

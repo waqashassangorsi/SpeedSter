@@ -106,12 +106,18 @@ const ResetPassword = () => {
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
-            marginTop: 90,
+            marginTop: 130,
             alignItems: 'center',
             marginBottom: 10,
           }}>
           <Text style={{color: 'black'}}>Already have an account?</Text>
-          <Text style={{color: '#df0300', fontWeight: 'bold', fontSize: 16}}>
+          <Text
+            style={{
+              color: '#df0300',
+              fontWeight: 'bold',
+              fontSize: 16,
+              paddingLeft: 5,
+            }}>
             Sign In
           </Text>
         </View>

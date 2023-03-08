@@ -60,13 +60,13 @@ const CardDetail = () => {
       <ScrollView>
         <View style={{marginHorizontal: 10}}>
           <View style={{marginTop: 20}}>
-            <Text style={{paddingLeft: 5, color: 'black', fontWeight: 'bold'}}>
+            <Text style={{paddingLeft: 0, color: 'black', fontWeight: 'bold'}}>
               Card Number
             </Text>
             <TextInput style={styles.input} />
           </View>
           <View>
-            <Text style={{paddingLeft: 5, color: 'black', fontWeight: 'bold'}}>
+            <Text style={{paddingLeft: 0, color: 'black', fontWeight: 'bold'}}>
               Card Holder Name
             </Text>
             <TextInput style={styles.input} />
@@ -75,7 +75,7 @@ const CardDetail = () => {
             <View style={{width: '47%'}}>
               <Text
                 style={{
-                  paddingLeft: 5,
+                  paddingLeft: 0,
                   marginVertical: 5,
                   color: 'black',
                   fontSize: 16,
@@ -87,7 +87,7 @@ const CardDetail = () => {
             <View style={{width: '47%'}}>
               <Text
                 style={{
-                  paddingLeft: 5,
+                  paddingLeft: 0,
                   marginVertical: 5,
                   color: 'black',
                   fontSize: 16,
@@ -126,14 +126,18 @@ const CardDetail = () => {
               justifyContent: 'center',
               alignItems: 'center',
               borderWidth: 1,
-              borderColor: colors.primary,
+              borderColor: colors.secondary,
               padding: 12,
               borderRadius: 25,
               marginTop: 30,
               marginBottom: 100,
             }}>
             <Text
-              style={{fontSize: 18, fontWeight: 'bold', color: colors.primary}}>
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: colors.secondary,
+              }}>
               Pay Now
             </Text>
           </TouchableOpacity>

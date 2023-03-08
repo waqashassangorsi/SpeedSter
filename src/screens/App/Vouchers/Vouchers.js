@@ -185,13 +185,18 @@ const Vouchers = () => {
                   paddingLeft: 3,
                   paddingTop: 5,
                 }}>
-                First Delivery free{' '}
+                20% Cash Back on{' '}
               </Text>
               <Text style={{paddingTop: 10, paddingLeft: 3}}>
                 Valid until 1st Mar 2023
               </Text>
             </View>
-            <View style={{width: '20%', justifyContent: 'flex-end'}}>
+            <View
+              style={{
+                width: '20%',
+                justifyContent: 'flex-end',
+                alignItems: 'flex-end',
+              }}>
               <Text style={{color: '#c70118'}}>Use Now</Text>
             </View>
             <Text
@@ -200,7 +205,7 @@ const Vouchers = () => {
                 fontWeight: 'bold',
                 position: 'absolute',
                 right: 10,
-                top: 50,
+                top: 47.5,
                 fontSize: 16,
               }}>
               14th Feburary
@@ -312,13 +317,16 @@ const Vouchers = () => {
           </View>
           <View
             style={{
-              alignItems: 'flex-end',
-              flex: 1,
-              paddingHorizontal: 5,
-              justifyContent: 'flex-end',
-              paddingBottom: 80,
+              marginBottom: 80,
             }}>
-            <Image source={whatsapp} style={{width: 90, height: 90}} />
+            <View
+              style={{
+                position: 'absolute',
+                bottom: -18,
+                right: -17,
+              }}>
+              <Image source={whatsapp} style={{width: 90, height: 90}} />
+            </View>
           </View>
         </View>
       </ScrollView>

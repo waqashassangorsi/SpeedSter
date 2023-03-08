@@ -41,16 +41,11 @@ const DrawerContent = ({props}) => {
               <Image
                 source={blacklogo}
                 resizeMode="contain"
-                styles={{width: 60, height: 40}}
+                styles={{width: 80, height: 80}}
               />
             }
             rightComponent={
-              <Entypo
-                name={'cross'}
-                size={30}
-                color={'black'}
-                style={{paddingTop: 3}}
-              />
+              <Entypo name={'cross'} size={30} color={'black'} style={{}} />
             }
           />
 

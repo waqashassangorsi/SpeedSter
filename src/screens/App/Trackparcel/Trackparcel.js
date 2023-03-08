@@ -85,7 +85,7 @@ const Trackparcel = () => {
         name={'cross'}
         size={30}
         color={'black'}
-        style={{position: 'absolute', right: 0, top: 106}}
+        style={{position: 'absolute', right: 6, top: 106}}
       />
       <MapView
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
@@ -103,14 +103,15 @@ const Trackparcel = () => {
           description={'description'}
         />
       </MapView>
-      <View
+      <TouchableOpacity
+        onPress={() => setModalVisible(true)}
         style={{
           position: 'absolute',
           right: 8,
           bottom: 340,
         }}>
         <Image source={whatsapp} />
-      </View>
+      </TouchableOpacity>
       <View
         style={{
           position: 'absolute',
@@ -124,20 +125,22 @@ const Trackparcel = () => {
         <TouchableOpacity
           onPress={() => refRBSheet.current.open()}
           style={{alignItems: 'center'}}>
-          <Text style={{color: 'white'}}>Cancel Request</Text>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>
+            Cancel Request
+          </Text>
         </TouchableOpacity>
       </View>
       <RBSheet
         ref={refRBSheet}
-        closeOnDragDown={true}
-        closeOnPressMask={false}
+        closeOnDragDown={false}
+        closeOnPressMask={true}
         height={350}
         customStyles={{
           wrapper: {
             backgroundColor: 'transparent',
           },
-          draggableIcon: {
-            backgroundColor: '#000',
+          wrapper: {
+            backgroundColor: 'rgba(52, 52, 52, 0.8)',
           },
         }}>
         <View
@@ -146,6 +149,7 @@ const Trackparcel = () => {
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingHorizontal: 10,
+            marginTop: 20,
           }}>
           <AntDesign name="arrowleft" color={'black'} size={20} />
           <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
@@ -405,7 +409,7 @@ const Trackparcel = () => {
             <View style={{alignItems: 'center'}}>
               <TouchableOpacity
                 style={{
-                  borderColor: colors.primary,
+                  borderColor: colors.secondary,
                   width: '50%',
                   borderWidth: 1,
                   justifyContent: 'center',
@@ -415,7 +419,7 @@ const Trackparcel = () => {
                   marginBottom: 50,
                   marginTop: 30,
                 }}>
-                <Text style={{color: colors.primary, fontWeight: 'bold'}}>
+                <Text style={{color: colors.secondary, fontWeight: 'bold'}}>
                   Submit
                 </Text>
               </TouchableOpacity>

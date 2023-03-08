@@ -154,13 +154,12 @@ const ParcelDetail = () => {
         <View
           style={{
             alignItems: 'center',
-            paddingVertical: 15,
+            paddingVertical: 20,
           }}>
-          <Text style={{color: 'black', fontSize: 16}}>Promo code applied</Text>
+          <Text style={{color: 'black', fontSize: 14}}>Promo code applied</Text>
         </View>
         <View
           style={{
-            marginTop: 15,
             borderColor: 'gray',
             borderWidth: 0.3,
             paddingVertical: 10,
@@ -176,16 +175,17 @@ const ParcelDetail = () => {
           onPress={() => refRBSheet.current.open()}
           style={{
             borderWidth: 1,
-            borderColor: colors.primary,
-            marginVertical: 70,
+            borderColor: colors.secondary,
+            // marginTop: 90,
             justifyContent: 'center',
             alignItems: 'center',
             marginHorizontal: 50,
             padding: 8,
             borderRadius: 20,
+            marginVertical: 90,
           }}>
           <Text
-            style={{color: colors.primary, fontSize: 18, fontWeight: 'bold'}}>
+            style={{color: colors.secondary, fontSize: 18, fontWeight: 'bold'}}>
             Add Parcel Details
           </Text>
         </TouchableOpacity>

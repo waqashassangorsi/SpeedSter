@@ -143,7 +143,7 @@ const SignupCopy = () => {
               color: '#df0300',
               fontWeight: 'bold',
               fontSize: 16,
-              paddingLeft: 2,
+              paddingLeft: 5,
             }}>
             Sign In
           </Text>

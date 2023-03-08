@@ -78,8 +78,9 @@ const Paypal = () => {
           <TouchableOpacity style={{}}>
             <Ionicons
               name={'checkbox-sharp'}
-              color={colors.primary}
+              color={colors.secondary}
               size={30}
+              // style={{}}
             />
           </TouchableOpacity>
           <TouchableOpacity style={{}}>

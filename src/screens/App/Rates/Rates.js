@@ -5,7 +5,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {FlatList} from 'react-native-gesture-handler';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {Persons, logo, blacklogo, whatsapp} from '../../../assets';
 import BottomTab from '../../../components/BottomTab';
 const Data = [1, 2, 3];
@@ -83,7 +83,7 @@ const Rates = () => {
       <Badge
         size={100}
         status="warning"
-        value=" "
+        value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,
@@ -92,45 +92,47 @@ const Rates = () => {
           scaleY: 0.6,
         }}
       />
-      <View
-        style={{
-          alignItems: 'center',
-          marginVertical: 10,
-        }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
-          Rates
-        </Text>
-        <Entypo
-          name={'cross'}
-          size={30}
-          color={'black'}
-          style={{position: 'absolute', right: 7}}
-        />
-      </View>
-      <View
-        style={{
-          marginTop: 15,
-          borderWidth: 1,
-          borderColor: '#ccc',
-          paddingVertical: 15,
-        }}>
-        <FlatList
-          data={Data}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          ItemSeparatorComponent={ItemDivider}
-        />
-      </View>
-      <View
-        style={{
-          alignItems: 'flex-end',
-          flex: 1,
-          paddingHorizontal: 5,
-          justifyContent: 'flex-end',
-          paddingBottom: 80,
-        }}>
-        <Image source={whatsapp} style={{width: 90, height: 90}} />
-      </View>
+      <ScrollView>
+        <View
+          style={{
+            alignItems: 'center',
+            marginVertical: 10,
+          }}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            Rates
+          </Text>
+          <Entypo
+            name={'cross'}
+            size={30}
+            color={'black'}
+            style={{position: 'absolute', right: 7}}
+          />
+        </View>
+        <View
+          style={{
+            marginTop: 15,
+            borderWidth: 1,
+            borderColor: '#ccc',
+            paddingVertical: 15,
+          }}>
+          <FlatList
+            data={Data}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            ItemSeparatorComponent={ItemDivider}
+          />
+        </View>
+        <View
+          style={{
+            alignItems: 'flex-end',
+            flex: 1,
+            // paddingHorizontal: 5,
+            marginTop: 120,
+            paddingBottom: 80,
+          }}>
+          <Image source={whatsapp} style={{width: 90, height: 90}} />
+        </View>
+      </ScrollView>
       <BottomTab />
     </View>
   );

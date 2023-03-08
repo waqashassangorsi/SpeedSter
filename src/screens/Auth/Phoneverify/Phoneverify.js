@@ -136,7 +136,7 @@ const Phoneverify = () => {
           style={{
             textAlign: 'right',
             paddingHorizontal: 20,
-            color: '#df0300',
+            color: '#aa2222',
             fontWeight: 'bold',
             fontSize: 16,
             marginTop: 10,
@@ -161,7 +161,7 @@ const Phoneverify = () => {
             alignItems: 'center',
           }}>
           <OTPTextInput
-            textInputStyle={{backgroundColor: '#d9d9d9'}}
+            textInputStyle={{backgroundColor: '#d9d9d9', borderRadius: 5}}
             tintColor={'#d9d9d9'}
             // containerStyle={{backgroundColor: '#d9d9d9'}}
           />
@@ -202,7 +202,13 @@ const Phoneverify = () => {
             marginBottom: 20,
           }}>
           <Text style={{color: 'black'}}>Already have an account?</Text>
-          <Text style={{color: '#df0300', fontWeight: 'bold', fontSize: 16}}>
+          <Text
+            style={{
+              color: '#df0300',
+              fontWeight: 'bold',
+              fontSize: 16,
+              paddingLeft: 5,
+            }}>
             Sign In
           </Text>
         </View>

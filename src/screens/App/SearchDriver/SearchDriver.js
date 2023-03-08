@@ -96,7 +96,18 @@ const SearchDriver = () => {
           />
         }
       />
-
+      <Badge
+        size={100}
+        status="warning"
+        value="1"
+        containerStyle={{
+          position: 'absolute',
+          right: 27,
+          top: 42,
+          scaleX: 0.6,
+          scaleY: 0.6,
+        }}
+      />
       <View
         style={{
           alignItems: 'center',
@@ -109,7 +120,7 @@ const SearchDriver = () => {
           name={'cross'}
           size={30}
           color={'black'}
-          style={{position: 'absolute', right: 7}}
+          style={{position: 'absolute', right: 6}}
         />
       </View>
       <ScrollView>
@@ -137,7 +148,7 @@ const SearchDriver = () => {
             borderBottomColor: 'gray',
             borderBottomWidth: 1,
           }}>
-          <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold'}}>
+          <Text style={{color: 'black', fontSize: 14}}>
             Searching for the drivers nearby
           </Text>
         </View>
