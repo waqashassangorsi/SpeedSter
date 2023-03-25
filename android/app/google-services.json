@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "865531717968",
+    "project_id": "speedster-55104",
+    "storage_bucket": "speedster-55104.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865531717968:android:bc2ae2b7937ad9c9462455",
+        "android_client_info": {
+          "package_name": "com.speedster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865531717968-opbp8m9ld48d0qv3l8kgjj7c90h7mc3j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.speedster",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "865531717968-2c0d1m37vu5c46enq2nnbti08l9rr0ub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWDOWCpRMnEckSyBlZ1A2I9WEntu4P2Os"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865531717968-2c0d1m37vu5c46enq2nnbti08l9rr0ub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

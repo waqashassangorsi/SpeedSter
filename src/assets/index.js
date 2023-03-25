@@ -32,3 +32,4 @@ export const box = require('./images/box.png');
 export const ice = require('./images/ice.png');
 export const right = require('./images/right.png');
 export const drawerlogo = require('./images/drawerlogo.png');
+export const menu = require('./images/menu.png');

@@ -15,8 +15,10 @@ import CountryPicker from 'react-native-country-picker-modal';
 import OTPTextInput from 'react-native-otp-textinput';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import colors from '../../../theme/colors';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
+import {useNavigation} from '@react-navigation/native';
 
-const Phoneverify = () => {
+const Phoneverify = ({route}) => {
   const [countryCode, setCountryCode] = useState('FR');
   const [country, setCountry] = useState(null);
   const [withCountryNameButton, setWithCountryNameButton] = useState(false);
@@ -26,14 +28,36 @@ const Phoneverify = () => {
   const [withAlphaFilter, setWithAlphaFilter] = useState(false);
   const [withCallingCode, setWithCallingCode] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [otp, setotp] = useState('');
+  const [showview, setshowview] = useState(0);
+  const navigation = useNavigation();
   const phoneInput = useRef(null);
-  console.log('first', withCallingCode);
-  const onSelect = country => {
-    // console.log('first', country);
-    setCountryCode(country.cca2);
-    setCountry(country);
-    setWithCallingCode(country.callingCode);
+  // const {confirmation} = route.params;
+  // console.log(
+  //   'checkphonenum',
+
+  //   confirmation,
+  // );
+  const callapi = () => {
+    navigation.navigate('Home');
   };
+  const subbmitotp = async () => {
+    let promise = new Promise((rsl, rej) => {
+      confirmation
+        .confirm(otp)
+        .then(confirmResult => {
+          callapi();
+          rsl(confirmResult);
+        })
+        .catch(error => {
+          rej(error.message);
+        });
+    });
+    promise.catch(err => {
+      alert(err);
+    });
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View
@@ -106,7 +130,8 @@ const Phoneverify = () => {
               setPhoneNumber(text);
             }}
           />
-          <View
+          <TouchableOpacity
+            onPress={() => setshowview(1)}
             style={{
               backgroundColor: '#aa2222',
               shadowColor: '#000',
@@ -130,7 +155,7 @@ const Phoneverify = () => {
               color="white"
               style={{alignSelf: 'center', paddingTop: 10}}
             />
-          </View>
+          </TouchableOpacity>
         </View>
         <Text
           style={{
@@ -143,57 +168,72 @@ const Phoneverify = () => {
           }}>
           Resend Code
         </Text>
-        <Text
-          style={{
-            paddingHorizontal: 10,
-            color: 'black',
-            fontWeight: 'bold',
-            fontSize: 16,
-            paddingVertical: 15,
-            paddingTop: 20,
-          }}>
-          Enter four digit verification code
-        </Text>
+        {showview == 1 && (
+          <View>
+            <Text
+              style={{
+                paddingHorizontal: 10,
+                color: 'black',
+                fontWeight: 'bold',
+                fontSize: 16,
+                paddingVertical: 15,
+                paddingTop: 20,
+              }}>
+              Enter four digit verification code
+            </Text>
 
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <OTPTextInput
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              {/* <OTPTextInput
             textInputStyle={{backgroundColor: '#d9d9d9', borderRadius: 5}}
             tintColor={'#d9d9d9'}
-            // containerStyle={{backgroundColor: '#d9d9d9'}}
-          />
-        </View>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'hidden',
-            paddingBottom: 5,
-          }}>
-          <TouchableOpacity
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#df0300',
-              width: '50%',
-              height: 30,
-              borderRadius: 7,
-              marginTop: 20,
-              shadowColor: '#000',
-              shadowOffset: {width: 1, height: 1},
-              shadowOpacity: 0.4,
-              shadowRadius: 3,
-              elevation: 4,
-            }}>
-            <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
-              Verify
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View
+          /> */}
+              <OTPInputView
+                pinCount={6}
+                style={{width: '90%', height: 60}}
+                codeInputFieldStyle={styles.underlineStyleBase}
+                code={otp}
+                placeholderTextColor={'black'}
+                onCodeChanged={e => setotp(e)}
+              />
+            </View>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                overflow: 'hidden',
+                paddingBottom: 5,
+              }}>
+              <TouchableOpacity
+                // onPress={() => subbmitotp()}
+                onPress={() => navigation.navigate('Home')}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '#df0300',
+                  width: '50%',
+                  height: 30,
+                  borderRadius: 7,
+                  marginTop: 20,
+                  shadowColor: '#000',
+                  shadowOffset: {width: 1, height: 1},
+                  shadowOpacity: 0.4,
+                  shadowRadius: 3,
+                  elevation: 4,
+                }}>
+                <Text
+                  style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+                  Verify
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Login')}
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
@@ -211,7 +251,7 @@ const Phoneverify = () => {
             }}>
             Sign In
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -228,5 +268,12 @@ const styles = StyleSheet.create({
   phoneNumberView: {
     width: '100%',
     height: 50,
+  },
+  underlineStyleBase: {
+    width: 45,
+    height: 45,
+    borderWidth: 1,
+    backgroundColor: '#D9D9D9',
+    color: 'black',
   },
 });

@@ -20,7 +20,14 @@ import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import AlertModal from '../../../components/AlertModal';
-import {blacklogo, cross, Person1, Persons, whatsapp} from '../../../assets';
+import {
+  blacklogo,
+  cross,
+  menu,
+  Person1,
+  Persons,
+  whatsapp,
+} from '../../../assets';
 import BottomTab from '../../../components/BottomTab';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -350,7 +357,14 @@ const Trackparcel = () => {
             />
           </View>
         </View>
+        <TouchableOpacity
+          style={{position: 'absolute', left: 50}}
+          // onPress={() => navigation.navigate('RideDetail')}
+        >
+          <Image source={menu} />
+        </TouchableOpacity>
       </View>
+
       <View>
         <Modal
           animationType="slide"

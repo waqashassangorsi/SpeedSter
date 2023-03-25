@@ -12,7 +12,9 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {logo, logo1} from '../../../assets';
+import {useNavigation} from '@react-navigation/native';
 const ResetPassword = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
       <View
@@ -83,6 +85,7 @@ const ResetPassword = () => {
             overflow: 'hidden',
           }}>
           <TouchableOpacity
+            onPress={() => navigation.navigate('Login')}
             style={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -102,7 +105,8 @@ const ResetPassword = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Login')}
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
@@ -120,7 +124,7 @@ const ResetPassword = () => {
             }}>
             Sign In
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

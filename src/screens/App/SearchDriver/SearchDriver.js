@@ -196,6 +196,7 @@ const SearchDriver = () => {
           </View>
         </View>
         <TouchableOpacity
+          onPress={() => navigation.navigate('Trackparcel')}
           style={{
             backgroundColor: '#d9d9d9',
             marginTop: 50,

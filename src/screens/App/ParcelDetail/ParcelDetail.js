@@ -172,7 +172,8 @@ const ParcelDetail = () => {
           />
         </View>
         <TouchableOpacity
-          onPress={() => refRBSheet.current.open()}
+          // onPress={() => refRBSheet.current.open()}
+          onPress={() => navigation.navigate('AddParcel')}
           style={{
             borderWidth: 1,
             borderColor: colors.secondary,

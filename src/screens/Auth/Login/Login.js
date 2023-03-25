@@ -16,7 +16,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {fb, google, logo1} from '../../../assets';
 import colors from '../../../theme/colors';
+import {useNavigation} from '@react-navigation/native';
 const Login = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
       <View
@@ -78,9 +80,11 @@ const Login = () => {
             />
             <Text style={{paddingLeft: 3, color: 'black'}}>Remember me</Text>
           </View>
-          <View style={{width: '50%', alignItems: 'flex-end'}}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ResetPassword')}
+            style={{width: '50%', alignItems: 'flex-end'}}>
             <Text style={{color: 'black'}}>Forgot password?</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -90,6 +94,7 @@ const Login = () => {
             paddingBottom: 5,
           }}>
           <TouchableOpacity
+            onPress={() => navigation.navigate('Home')}
             style={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -111,7 +116,7 @@ const Login = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View
+        {/* <View
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
@@ -124,13 +129,15 @@ const Login = () => {
           <View style={{paddingLeft: 10}}>
             <Image source={google} />
           </View>
-        </View>
-        <View
+        </View> */}
+        <TouchableOpacity
+          onPress={() => navigation.navigate('SignupCopy')}
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
             marginBottom: 10,
+            marginTop: 20,
           }}>
           <Text style={{color: 'black'}}>Don't have an account?</Text>
           <Text
@@ -142,7 +149,7 @@ const Login = () => {
             }}>
             Sign Up
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

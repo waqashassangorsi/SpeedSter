@@ -1,7 +1,6 @@
 package com.speedster;
 
 import com.facebook.react.ReactActivity;
-
 public class MainActivity extends ReactActivity {
 
   /**

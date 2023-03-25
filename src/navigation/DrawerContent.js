@@ -29,7 +29,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Header} from 'react-native-elements';
-const DrawerContent = ({props}) => {
+const DrawerContent = ({props, navigation}) => {
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -117,7 +117,8 @@ const DrawerContent = ({props}) => {
               </Text>
               <Feather name="chevron-right" color={'black'} size={20} />
             </View>
-            <View
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Vouchers')}
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -133,9 +134,10 @@ const DrawerContent = ({props}) => {
                 Offers
               </Text>
               <Feather name="chevron-right" color={'black'} size={20} />
-            </View>
+            </TouchableOpacity>
           </View>
-          <View
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Wallet')}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -147,14 +149,15 @@ const DrawerContent = ({props}) => {
             <View style={{width: '25%'}}>
               <Image source={wallet} />
             </View>
-            <TouchableOpacity style={{width: '67%'}}>
+            <View style={{width: '67%'}}>
               <Text style={{color: 'black', fontSize: 15}}>Wallet</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{width: '20%'}}>
+            </View>
+            <View style={{width: '20%'}}>
               <Entypo name="chevron-small-right" color={'black'} size={20} />
-            </TouchableOpacity>
-          </View>
-          <View
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Rates')}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -165,14 +168,15 @@ const DrawerContent = ({props}) => {
             <View style={{width: '25%'}}>
               <Image source={rates} />
             </View>
-            <TouchableOpacity style={{width: '67%'}}>
+            <View style={{width: '67%'}}>
               <Text style={{color: 'black', fontSize: 15}}>Rates</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{width: '20%'}}>
+            </View>
+            <View style={{width: '20%'}}>
               <Entypo name="chevron-small-right" color={'black'} size={20} />
-            </TouchableOpacity>
-          </View>
-          <View
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Refferals')}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -183,14 +187,15 @@ const DrawerContent = ({props}) => {
             <View style={{width: '25%'}}>
               <Image source={rating} />
             </View>
-            <TouchableOpacity style={{width: '67%'}}>
+            <View style={{width: '67%'}}>
               <Text style={{color: 'black', fontSize: 15}}>Referals</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{width: '20%'}}>
+            </View>
+            <View style={{width: '20%'}}>
               <Entypo name="chevron-small-right" color={'black'} size={20} />
-            </TouchableOpacity>
-          </View>
-          <View
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Contact')}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -201,14 +206,15 @@ const DrawerContent = ({props}) => {
             <View style={{width: '25%'}}>
               <Image source={breif} />
             </View>
-            <TouchableOpacity style={{width: '67%'}}>
+            <View style={{width: '67%'}}>
               <Text style={{color: 'black', fontSize: 15}}>Contact us</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{width: '20%'}}>
+            </View>
+            <View style={{width: '20%'}}>
               <Entypo name="chevron-small-right" color={'black'} size={20} />
-            </TouchableOpacity>
-          </View>
-          <View
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Insuarance')}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -219,14 +225,15 @@ const DrawerContent = ({props}) => {
             <View style={{width: '25%'}}>
               <Image source={breif} />
             </View>
-            <TouchableOpacity style={{width: '67%'}}>
+            <View style={{width: '67%'}}>
               <Text style={{color: 'black', fontSize: 15}}>Insuarance</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{width: '20%'}}>
+            </View>
+            <View style={{width: '20%'}}>
               <Entypo name="chevron-small-right" color={'black'} size={20} />
-            </TouchableOpacity>
-          </View>
-          <View
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Works')}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -237,13 +244,13 @@ const DrawerContent = ({props}) => {
             <View style={{width: '25%'}}>
               <Image source={arrow} />
             </View>
-            <TouchableOpacity style={{width: '67%'}}>
+            <View style={{width: '67%'}}>
               <Text style={{color: 'black', fontSize: 15}}>How it works</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{width: '20%'}}>
+            </View>
+            <View style={{width: '20%'}}>
               <Entypo name="chevron-small-right" color={'black'} size={20} />
-            </TouchableOpacity>
-          </View>
+            </View>
+          </TouchableOpacity>
           <TouchableOpacity
             style={{
               justifyContent: 'center',

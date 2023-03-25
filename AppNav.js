@@ -48,6 +48,8 @@ import ThankYou from './src/screens/App/ThankYou/ThankYou';
 import Vouchers from './src/screens/App/Vouchers/Vouchers';
 import LostAccount from './src/screens/Auth/LostAccount';
 import DateTime from './src/screens/App/DateTime';
+import RideDetail from './src/screens/App/RideDetail';
+import PaymentSecreen from './src/screens/App/PaymentSecreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
@@ -68,6 +70,7 @@ export function DrawerNav({isLoggedIn}) {
         <Drawer.Screen name="Help" component={Help} />
         <Drawer.Screen name="Promo" component={Promo} />
         <Drawer.Screen name="AddWallet" component={AddWallet} />
+        <Drawer.Screen name="RideDetail" component={RideDetail} />
         <Drawer.Screen name="Phoneverify" component={Phoneverify} />
         <Drawer.Screen name="ResetPassword" component={ResetPassword} />
         <Drawer.Screen name="Contact" component={Contact} />
@@ -95,6 +98,7 @@ export function DrawerNav({isLoggedIn}) {
         <Drawer.Screen name="ThankYou" component={ThankYou} />
         <Drawer.Screen name="Vouchers" component={Vouchers} />
         <Drawer.Screen name="DateTime" component={DateTime} />
+        <Drawer.Screen name="PaymentSecreen" component={PaymentSecreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -121,6 +125,11 @@ function AppNav({route}) {
           options={{headerShown: false, animationEnabled: true}}
         />
         <Stack.Screen
+          name="RideDetail"
+          component={RideDetail}
+          options={{headerShown: false, animationEnabled: true}}
+        />
+        <Stack.Screen
           name="Vouchers"
           component={Vouchers}
           options={{headerShown: false, animationEnabled: true}}
@@ -128,6 +137,11 @@ function AppNav({route}) {
         <Stack.Screen
           name="SaveLocation"
           component={SaveLocation}
+          options={{headerShown: false, animationEnabled: true}}
+        />
+        <Stack.Screen
+          name="PaymentSecreen"
+          component={PaymentSecreen}
           options={{headerShown: false, animationEnabled: true}}
         />
         <Stack.Screen

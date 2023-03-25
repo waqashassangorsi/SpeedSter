@@ -5,7 +5,10 @@ import {
   Image,
   Dimensions,
   TextInput,
+  TouchableOpacity,
+  PermissionsAndroid,
 } from 'react-native';
+import Geolocation from 'react-native-geolocation-service';
 import React, {useState, useRef} from 'react';
 import {Header} from 'react-native-elements';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -14,15 +17,16 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Foundation from 'react-native-vector-icons/Foundation';
+import Entypo from 'react-native-vector-icons/Entypo';
 import {
   blacklogo,
-  car,
-  Persons,
-  bus,
-  truck,
-  promo,
+  solid,
   Person1,
   whatsapp,
+  promo,
+  car,
+  bus,
+  truck,
 } from '../../../assets';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BottomTab from '../../../components/BottomTab';
@@ -34,15 +38,42 @@ import {Calendar} from 'react-native-calendars';
 import {CalendarList} from 'react-native-calendars';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {useNavigation} from '@react-navigation/native';
 
 const Data = [1, 2, 3];
 const SLIDER_WIDTH = 400;
 const ITEM_WIDTH = 400;
+const requestLocationPermission = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Geolocation Permission',
+        message: 'Can we access your location?',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    console.log('granted', granted);
+    if (granted === 'granted') {
+      console.log('You can use Geolocation');
+      return true;
+    } else {
+      console.log('You cannot use Geolocation');
+      return false;
+    }
+  } catch (err) {
+    return false;
+  }
+};
 const Home = () => {
+  const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
   const [mydate, setDate] = useState(new Date());
   const [displaymode, setMode] = useState('time');
   const [isDisplayDate, setShow] = useState(false);
+  const [location, setLocation] = useState(false);
 
   const [index, setIndex] = useState(0);
   const isCarousel = useRef(null);
@@ -107,13 +138,40 @@ const Home = () => {
       </View>
     </View>
   );
+  const getLocation = () => {
+    const result = requestLocationPermission();
+    result.then(res => {
+      console.log('res is:', res);
+      if (res) {
+        Geolocation.getCurrentPosition(
+          position => {
+            console.log(position);
+            setLocation(position);
+          },
+          error => {
+            // See error code charts below.
+            console.log(error.code, error.message);
+            setLocation(false);
+          },
+          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+        );
+      }
+    });
+    console.log(location);
+  };
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Header
         containerStyle={{}}
         backgroundColor={'transparent'}
         leftComponent={
-          <Octicons name={'three-bars'} size={30} color={'black'} style={{}} />
+          <Octicons
+            name={'three-bars'}
+            size={30}
+            color={'black'}
+            style={{}}
+            onPress={() => navigation.openDrawer()}
+          />
         }
         centerComponent={<Image source={blacklogo} resizeMode="contain" />}
         rightComponent={
@@ -125,7 +183,7 @@ const Home = () => {
           />
         }
       />
-      <ScrollView style={{paddingBottom: 100}}>
+      <ScrollView style={{}}>
         <View style={{marginVertical: 10}}>
           <Carousel
             ref={isCarousel}
@@ -159,7 +217,37 @@ const Home = () => {
             />
           </View>
         </View>
-
+        <View
+          style={{
+            flexDirection: 'row',
+            backgroundColor: '#F4F4F4',
+            marginHorizontal: 10,
+            borderRadius: 10,
+            paddingVertical: 10,
+          }}>
+          <View style={{paddingLeft: 15}}>
+            <Image source={solid} />
+          </View>
+          <View style={{paddingLeft: 10}}>
+            <Text style={{color: '#444444'}}>Turn on your location</Text>
+            <Text style={{color: '#444444'}}>
+              Let speedster app access to your locatin
+            </Text>
+            <TouchableOpacity
+              onPress={getLocation}
+              style={{
+                backgroundColor: '#D9D9D9',
+                width: '60%',
+                padding: 5,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 20,
+                marginVertical: 10,
+              }}>
+              <Text style={{color: 'black'}}>Turn on location</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <View style={{marginHorizontal: 10}}>
           <Text
             style={{
@@ -259,9 +347,17 @@ const Home = () => {
               </View>
             </View>
             <View style={{width: '80%'}}>
-              <TextInput placeholder="Select pick up" style={styles.input} />
+              <TouchableOpacity
+                onPress={() => navigation.navigate('SaveLocation')}
+                style={styles.input}>
+                <Text style={{paddingTop: 10}}>Select Pick up</Text>
+              </TouchableOpacity>
               <View>
-                <TextInput placeholder="Select drop off" style={styles.input} />
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('SaveLocation')}
+                  style={styles.input}>
+                  <Text style={{paddingTop: 10}}>Select drop off</Text>
+                </TouchableOpacity>
                 <AntDesign
                   style={styles.plus}
                   name="pluscircle"
@@ -291,7 +387,7 @@ const Home = () => {
               <View>
                 <TextInput
                   style={styles.input}
-                  placeholder="Confirm Password"
+                  placeholder="Add multiple delivery"
                   placeholderTextColor={'black'}
                 />
 
@@ -309,6 +405,35 @@ const Home = () => {
               </View>
             </View>
           </View>
+        </View>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            paddingBottom: 10,
+          }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ParcelDetail')}
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: colors.secondary,
+              width: '50%',
+              height: 30,
+              borderRadius: 7,
+              elevation: 8,
+              borderRadius: 3,
+              shadowColor: '#000',
+              shadowOffset: {width: 1, height: 1},
+              shadowOpacity: 0.4,
+              shadowRadius: 3,
+              elevation: 4,
+            }}>
+            <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+              Continue
+            </Text>
+          </TouchableOpacity>
         </View>
         <View style={{}}>
           <View
@@ -372,7 +497,13 @@ const Home = () => {
           }}>
           Nearby
         </Text>
-        <View style={{marginHorizontal: 15, marginTop: 10, marginBottom: 300}}>
+        <View
+          style={{
+            marginHorizontal: 15,
+            marginTop: 10,
+            //  marginBottom: 300,
+            marginVertical: 30,
+          }}>
           <MapView
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             style={styles.map}
@@ -411,6 +542,12 @@ const Home = () => {
               paddingVertical: 10,
               // flex: Platform.OS == "android" ? 0.5 : 0.5,
             }}>
+            <Entypo
+              name={'cross'}
+              size={30}
+              color={'black'}
+              onPress={() => setModalVisible(false)}
+            />
             <Calendar
               disableArrowLeft={true}
               hideArrows={true}
@@ -466,6 +603,10 @@ const styles = StyleSheet.create({
   plus: {position: 'absolute', right: 0, top: 30},
   map: {
     width: '100%',
-    height: '50%',
+    height: '100%',
+    marginBottom: 300,
   },
+  // map: {
+  //   ...StyleSheet.absoluteFillObject,
+  // },
 });

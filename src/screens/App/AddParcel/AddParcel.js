@@ -25,7 +25,7 @@ const Data = [1, 2, 3];
 
 const AddParcel = () => {
   const refRBSheet = useRef();
-
+  const navigation = useNavigation();
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Header
@@ -104,6 +104,27 @@ const AddParcel = () => {
               alignItems: 'center',
             }}>
             <TouchableOpacity style={{}}>
+              <AntDesign name={'checksquareo'} color={'#444444'} size={30} />
+            </TouchableOpacity>
+            <TouchableOpacity style={{}}>
+              <Text
+                style={{
+                  fontSize: 13,
+                  marginLeft: 3,
+                  color: '#444444',
+                  fontWeight: 'bold',
+                }}>
+                Need Insurance
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginTop: 10,
+            }}>
+            <TouchableOpacity style={{}}>
               <AntDesign
                 name={'checksquareo'}
                 color={colors.primary}
@@ -122,7 +143,9 @@ const AddParcel = () => {
               </Text>
             </TouchableOpacity>
           </View>
+
           <TouchableOpacity
+            //
             onPress={() => refRBSheet.current.open()}
             style={{
               borderWidth: 1,
@@ -213,6 +236,7 @@ const AddParcel = () => {
               left: 15,
             }}>
             <TouchableOpacity
+              onPress={() => navigation.navigate('SearchDriver')}
               style={{
                 width: '46%',
                 borderColor: colors.primary,
