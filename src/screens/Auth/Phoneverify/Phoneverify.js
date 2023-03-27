@@ -17,6 +17,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import colors from '../../../theme/colors';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 const Phoneverify = ({route}) => {
   const [countryCode, setCountryCode] = useState('FR');
@@ -30,20 +31,16 @@ const Phoneverify = ({route}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setotp] = useState('');
   const [showview, setshowview] = useState(0);
+  const [confirm, setConfirm] = useState(null);
   const navigation = useNavigation();
   const phoneInput = useRef(null);
-  // const {confirmation} = route.params;
-  // console.log(
-  //   'checkphonenum',
-
-  //   confirmation,
-  // );
+  console.log('first', phoneNumber);
   const callapi = () => {
     navigation.navigate('Home');
   };
   const subbmitotp = async () => {
     let promise = new Promise((rsl, rej) => {
-      confirmation
+      confirm
         .confirm(otp)
         .then(confirmResult => {
           callapi();
@@ -56,6 +53,13 @@ const Phoneverify = ({route}) => {
     promise.catch(err => {
       alert(err);
     });
+  };
+  const showView = async () => {
+    const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+    setConfirm(confirmation);
+    if (confirmation) {
+      setshowview(1);
+    }
   };
 
   return (
@@ -131,7 +135,7 @@ const Phoneverify = ({route}) => {
             }}
           />
           <TouchableOpacity
-            onPress={() => setshowview(1)}
+            onPress={() => showView()}
             style={{
               backgroundColor: '#aa2222',
               shadowColor: '#000',
@@ -208,8 +212,7 @@ const Phoneverify = ({route}) => {
                 paddingBottom: 5,
               }}>
               <TouchableOpacity
-                // onPress={() => subbmitotp()}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => subbmitotp()}
                 style={{
                   justifyContent: 'center',
                   alignItems: 'center',

@@ -73,18 +73,12 @@ const SignupCopy = () => {
     } else if (cnf !== pass) {
       alert('password and confirm password does not match');
     } else {
-      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-
-      // if (confirmation) {
-      //   navigation.navigate('Phoneverify', {
-      //     Email: email,
-      //     confirmation: confirmation,
-      //     password: pass,
-      //     Name: name,
-      //     Cnf: cnf,
-      //   });
-      // }
-      navigation.navigate('Phoneverify');
+      navigation.navigate('Phoneverify', {
+        Email: email,
+        password: pass,
+        Name: name,
+        Cnf: cnf,
+      });
     }
   };
   return (
