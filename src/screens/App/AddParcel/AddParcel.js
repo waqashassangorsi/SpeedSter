@@ -5,6 +5,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import React, {useState, useRef} from 'react';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
@@ -14,18 +15,83 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
-import {blacklogo, box} from '../../../assets';
+import {blacklogo, box, Person1} from '../../../assets';
 import BottomTab from '../../../components/BottomTab';
 import colors from '../../../theme/colors';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Persons} from '../../../assets';
 import RBSheet from 'react-native-raw-bottom-sheet';
+const ImagePicker = require('react-native-image-picker');
 
 const Data = [1, 2, 3];
 
 const AddParcel = () => {
   const refRBSheet = useRef();
   const navigation = useNavigation();
+  const [profilePath, setFilePath] = useState('');
+  const [count, setCount] = useState(0);
+
+  const chooseFile = () => {
+    let options = {
+      title: 'Select Image',
+      customButtons: [
+        {
+          name: 'customOptionKey',
+          title: 'Choose Photo from Custom Option',
+        },
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchImageLibrary(options, response => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+      } else if (response.error) {
+      } else if (response.customButton) {
+        alert(response.customButton);
+      } else {
+        let source = response;
+        // You can also display the image using data:
+        // let source = {
+        //   uri: 'data:image/jpeg;base64,' + response.data
+        // };
+        setFilePath(source);
+        setCount(count + 1);
+      }
+    });
+  };
+  const updateProfile = async id => {
+    const formData = new FormData();
+
+    if (profilePath != '') {
+      formData.append('image', {
+        uri: profilePath.uri,
+        name: profilePath.fileName,
+        type: profilePath.type,
+      });
+    }
+  };
+  // const handleAddView = () => {
+  //   setCount(count + 1);
+  // };
+  const renderViews = () => {
+    const views = [];
+    for (let i = 0; i < count; i++) {
+      views.push(
+        <View key={i}>
+          <Image
+            source={profilePath}
+            style={{height: 100, width: 100, borderRadius: 10, marginLeft: 10}}
+            resizeMode="cover"
+          />
+        </View>,
+      );
+    }
+    return views;
+  };
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Header
@@ -71,26 +137,51 @@ const AddParcel = () => {
           <Text style={{fontSize: 18, color: 'black', paddingTop: 10}}>
             Parcel Image<Text style={{color: colors.secondary}}>*</Text>
           </Text>
-          <View style={{flexDirection: 'row', marginVertical: 20}}>
-            <Image
-              source={Persons}
-              style={{height: 140, width: 140}}
-              resizeMode="cover"
-            />
+
+          <ScrollView
+            horizontal={true}
+            style={{
+              flexDirection: 'row',
+              marginVertical: 20,
+            }}>
+            {/* <TouchableOpacity onPress={() => chooseFile()}>
+              {profilePath !== '' && (
+                <Image
+                  source={profilePath}
+                  style={{height: 100, width: 100, borderRadius: 10}}
+                  resizeMode="cover"
+                />
+              )}
+              {profilePath == '' && (
+                <Image
+                  source={Persons}
+                  style={{height: 100, width: 100}}
+                  resizeMode="cover"
+                />
+              )}
+            </TouchableOpacity> */}
+            {renderViews()}
+
             <View
               style={{
-                width: '40%',
+                width: 100,
                 borderColor: 'gray',
                 borderWidth: 1,
                 borderStyle: 'dotted',
-                marginLeft: 20,
                 borderRadius: 15,
                 alignItems: 'center',
                 justifyContent: 'center',
+                height: 100,
+                marginLeft: 10,
               }}>
-              <AntDesign name="plus" color={'gray'} size={20} />
+              <AntDesign
+                name="plus"
+                color={'gray'}
+                size={20}
+                onPress={chooseFile}
+              />
             </View>
-          </View>
+          </ScrollView>
           <Text style={{fontSize: 18, color: 'black', paddingTop: 12}}>
             Parcel Description<Text style={{color: colors.secondary}}>*</Text>
           </Text>

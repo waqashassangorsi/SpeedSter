@@ -36,6 +36,7 @@ import {
 import BottomTab from '../../../components/BottomTab';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {ScrollView} from 'react-native-gesture-handler';
+import colors from '../../../theme/colors';
 
 const Trackparcel = () => {
   const refRBSheet = useRef();
@@ -124,7 +125,7 @@ const Trackparcel = () => {
         style={{
           position: 'absolute',
           right: 8,
-          bottom: 340,
+          bottom: 430,
         }}>
         <Image source={whatsapp} />
       </TouchableOpacity>
@@ -133,7 +134,7 @@ const Trackparcel = () => {
           position: 'absolute',
           backgroundColor: '#c70118',
           right: 17,
-          bottom: 310,
+          bottom: 400,
           width: '45%',
           padding: 8,
           borderRadius: 18,
@@ -241,6 +242,39 @@ const Trackparcel = () => {
           </TouchableOpacity>
         </ScrollView>
       </RBSheet>
+      <View
+        style={{
+          position: 'absolute',
+          backgroundColor: 'white',
+          marginHorizontal: 15,
+          paddingVertical: 20,
+          bottom: 285,
+          borderTopRightRadius: 20,
+          borderTopLeftRadius: 20,
+        }}>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{width: '60%', paddingLeft: 15}}>
+            <Text
+              style={{
+                color: colors.secondary,
+                fontSize: 16,
+              }}>
+              Your driver has arrived!
+            </Text>
+          </View>
+          <View style={{width: '40%', alignItems: 'center'}}>
+            <Text
+              style={{
+                color: colors.secondary,
+                fontWeight: 'bold',
+                fontSize: 18,
+              }}>
+              5 min
+            </Text>
+            <Text style={{color: colors.secondary}}>Waiting Time</Text>
+          </View>
+        </View>
+      </View>
       <View
         style={{
           position: 'absolute',

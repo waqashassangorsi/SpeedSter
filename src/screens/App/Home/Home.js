@@ -18,6 +18,8 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import {
   blacklogo,
   solid,
@@ -27,6 +29,7 @@ import {
   car,
   bus,
   truck,
+  checkmark,
 } from '../../../assets';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BottomTab from '../../../components/BottomTab';
@@ -39,6 +42,7 @@ import {CalendarList} from 'react-native-calendars';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {useNavigation} from '@react-navigation/native';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
 const Data = [1, 2, 3];
 const SLIDER_WIDTH = 400;
@@ -74,6 +78,7 @@ const Home = () => {
   const [displaymode, setMode] = useState('time');
   const [isDisplayDate, setShow] = useState(false);
   const [location, setLocation] = useState(false);
+  const refRBSheet = useRef();
 
   const [index, setIndex] = useState(0);
   const isCarousel = useRef(null);
@@ -522,14 +527,85 @@ const Home = () => {
           </MapView>
         </View>
 
-        <View
+        <TouchableOpacity
+          onPress={() => refRBSheet.current.open()}
           style={{
             position: 'absolute',
             bottom: 60,
             right: 0,
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />
-        </View>
+        </TouchableOpacity>
+        <RBSheet
+          ref={refRBSheet}
+          closeOnDragDown={false}
+          closeOnPressMask={true}
+          height={350}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'transparent',
+            },
+            wrapper: {
+              backgroundColor: 'rgba(52, 52, 52, 0.8)',
+            },
+          }}>
+          <View
+            style={{
+              alignItems: 'center',
+              marginTop: 20,
+            }}>
+            <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
+              Receiver Details
+            </Text>
+          </View>
+          <View style={{marginTop: 30}}>
+            <Text style={{paddingLeft: 10}}>Receiver's Name</Text>
+            <TextInput
+              style={styles.input1}
+              placeholder="Name"
+              placeholderTextColor={'#A4A4A4'}
+            />
+            <Octicons
+              style={styles.person}
+              name="person"
+              size={20}
+              color="#A4A4A4"
+            />
+          </View>
+          <View style={{marginTop: 30}}>
+            <Text style={{paddingLeft: 10}}>Receiver's Name</Text>
+            <TextInput
+              style={styles.input1}
+              placeholder="Number"
+              placeholderTextColor={'#A4A4A4'}
+            />
+
+            <MaterialIcons
+              style={styles.lock}
+              name="call"
+              size={20}
+              color="#A4A4A4"
+            />
+            <MaterialIcons
+              style={styles.eye}
+              name="mode-edit"
+              size={20}
+              color={colors.secondary}
+            />
+          </View>
+          <TouchableOpacity
+            style={{
+              backgroundColor: colors.secondary,
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 7,
+              marginVertical: 20,
+              marginHorizontal: 30,
+              borderRadius: 20,
+            }}>
+            <Image source={checkmark} />
+          </TouchableOpacity>
+        </RBSheet>
         <Modal
           animationType="slide"
           transparent={true}
@@ -599,7 +675,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginVertical: 5,
   },
-  eye1: {position: 'absolute', right: 10, top: 20},
   plus: {position: 'absolute', right: 0, top: 30},
   map: {
     width: '100%',
@@ -609,4 +684,19 @@ const styles = StyleSheet.create({
   // map: {
   //   ...StyleSheet.absoluteFillObject,
   // },
+  input1: {
+    borderRadius: 20,
+    backgroundColor: '#fff',
+    height: 50,
+    shadowColor: '#000',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+    elevation: 6,
+    paddingLeft: 50,
+    marginTop: 10,
+  },
+  person: {position: 'absolute', left: 20, top: 43},
+  eye: {position: 'absolute', right: 20, top: 43},
+  lock: {position: 'absolute', top: 43, left: 20},
 });

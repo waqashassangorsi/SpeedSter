@@ -50,6 +50,7 @@ import LostAccount from './src/screens/Auth/LostAccount';
 import DateTime from './src/screens/App/DateTime';
 import RideDetail from './src/screens/App/RideDetail';
 import PaymentSecreen from './src/screens/App/PaymentSecreen';
+import Chatting from './src/screens/App/Chatting/Chatting';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
@@ -99,6 +100,7 @@ export function DrawerNav({isLoggedIn}) {
         <Drawer.Screen name="Vouchers" component={Vouchers} />
         <Drawer.Screen name="DateTime" component={DateTime} />
         <Drawer.Screen name="PaymentSecreen" component={PaymentSecreen} />
+        <Drawer.Screen name="Chatting" component={Chatting} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -127,6 +129,11 @@ function AppNav({route}) {
         <Stack.Screen
           name="RideDetail"
           component={RideDetail}
+          options={{headerShown: false, animationEnabled: true}}
+        />
+        <Stack.Screen
+          name="Chatting"
+          component={Chatting}
           options={{headerShown: false, animationEnabled: true}}
         />
         <Stack.Screen

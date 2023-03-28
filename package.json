@@ -30,6 +30,7 @@
     "react": "17.0.2",
     "react-native": "0.67.0",
     "react-native-calendars": "^1.1293.0",
+    "react-native-contacts": "^7.0.5",
     "react-native-date-picker": "^4.2.9",
     "react-native-elements": "^3.4.3",
     "react-native-geolocation-service": "^5.3.1",

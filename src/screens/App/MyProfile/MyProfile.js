@@ -57,6 +57,17 @@ const MyProfile = ({}) => {
       }
     });
   };
+  const updateProfile = async id => {
+    const formData = new FormData();
+
+    if (profilePath != '') {
+      formData.append('image', {
+        uri: profilePath.uri,
+        name: profilePath.fileName,
+        type: profilePath.type,
+      });
+    }
+  };
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Header
@@ -122,10 +133,18 @@ const MyProfile = ({}) => {
             alignItems: 'center',
             marginVertical: 20,
           }}>
-          <Image
-            source={Person1}
-            style={{height: 120, width: 120, borderRadius: 120 / 2}}
-          />
+          {profilePath !== '' && (
+            <Image
+              source={profilePath}
+              style={{height: 120, width: 120, borderRadius: 120 / 2}}
+            />
+          )}
+          {profilePath == '' && (
+            <Image
+              source={Person1}
+              style={{height: 120, width: 120, borderRadius: 120 / 2}}
+            />
+          )}
           <TouchableOpacity
             onPress={() => chooseFile()}
             style={{

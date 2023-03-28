@@ -41,3 +41,4 @@ export const smallbox = require('./images/smallbox.png');
 export const smallwallet = require('./images/smallwallet.png');
 export const messagedp = require('./images/messagedp.png');
 export const cross1 = require('./images/cross1.png');
+export const checkmark = require('./images/checkmark.png');
