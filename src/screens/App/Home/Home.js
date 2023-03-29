@@ -7,9 +7,10 @@ import {
   TextInput,
   TouchableOpacity,
   PermissionsAndroid,
+  FlatList,
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {Header} from 'react-native-elements';
 import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -19,7 +20,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Feather from 'react-native-vector-icons/Feather';
+import Contacts from 'react-native-contacts';
+import ListItem from '../../../components/ListItem';
 import {
   blacklogo,
   solid,
@@ -30,6 +32,8 @@ import {
   bus,
   truck,
   checkmark,
+  cross,
+  cross1,
 } from '../../../assets';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BottomTab from '../../../components/BottomTab';
@@ -74,11 +78,14 @@ const requestLocationPermission = async () => {
 const Home = () => {
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isModalVisible1, setModalVisible1] = useState(false);
+  const [modal, setmodal] = useState(false);
   const [mydate, setDate] = useState(new Date());
   const [displaymode, setMode] = useState('time');
   const [isDisplayDate, setShow] = useState(false);
   const [location, setLocation] = useState(false);
   const refRBSheet = useRef();
+  const [contacts, setContacts] = useState([]);
 
   const [index, setIndex] = useState(0);
   const isCarousel = useRef(null);
@@ -163,6 +170,43 @@ const Home = () => {
       }
     });
     console.log(location);
+  };
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+        title: 'Contacts',
+        message: 'This app would like to view your contacts.',
+      }).then(() => {
+        loadContacts();
+      });
+    } else {
+      loadContacts();
+    }
+  }, []);
+
+  const loadContacts = () => {
+    Contacts.getAll()
+      .then(contacts => {
+        contacts.sort(
+          (a, b) => a.givenName.toLowerCase() > b.givenName.toLowerCase(),
+        );
+        setContacts(contacts);
+      })
+      .catch(e => {
+        alert('Permission to access contacts was denied');
+        console.warn('Permission to access contacts was denied');
+      });
+  };
+
+  const openContact = contact => {
+    console.log(JSON.stringify(contact));
+    Contacts.openExistingContact(contact);
+  };
+  const toggleModal = () => {
+    setModalVisible1(!isModalVisible1);
+  };
+  const closemodal = () => {
+    setModalVisible1(false);
   };
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -591,6 +635,7 @@ const Home = () => {
               name="mode-edit"
               size={20}
               color={colors.secondary}
+              onPress={toggleModal}
             />
           </View>
           <TouchableOpacity
@@ -629,22 +674,6 @@ const Home = () => {
               hideArrows={true}
               markedDates={marked}
             />
-            {/* <Calendar
-              style={
-                {
-                  // height: 350,
-                }
-              }
-              theme={{
-                calendarBackground: 'blue',
-              }}
-              // Enable horizontal scrolling, default = false
-              horizontal={true}
-              // Enable paging on horizontal, default = false
-              pagingEnabled={true}
-              // Set custom calendarWidth.
-              // calendarWidth={320}
-            /> */}
           </View>
         </Modal>
         {isDisplayDate && (
@@ -658,6 +687,66 @@ const Home = () => {
           />
         )}
       </ScrollView>
+      <View style={{flex: 1}}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          isVisible={isModalVisible1}>
+          <View
+            style={{
+              justifyContent: 'center',
+              backgroundColor: 'white',
+              borderRadius: 10,
+
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
+              elevation: 5,
+              paddingBottom: 60,
+            }}>
+            <View
+              style={{
+                alignItems: 'flex-end',
+                paddingRight: 10,
+                paddingTop: 20,
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  closemodal();
+                }}>
+                <Image
+                  source={cross1}
+                  resizemode="contain"
+                  style={{
+                    height: 20,
+                    width: 20,
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              data={contacts}
+              renderItem={contact => {
+                {
+                  console.log('contact -> ' + JSON.stringify(contact));
+                }
+                return (
+                  <ListItem
+                    key={contact.item.recordID}
+                    item={contact.item}
+                    onPress={openContact}
+                  />
+                );
+              }}
+              keyExtractor={item => item.recordID}
+            />
+          </View>
+        </Modal>
+      </View>
       <BottomTab />
     </View>
   );

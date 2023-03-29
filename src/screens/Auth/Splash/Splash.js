@@ -18,7 +18,7 @@ const Splash = ({navigation, isLoggedIn, user}) => {
         navigation.dispatch(
           CommonActions.reset({
             index: 0,
-            routes: [{name: 'AddParcel'}],
+            routes: [{name: 'Home'}],
           }),
         );
       }
