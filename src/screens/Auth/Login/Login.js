@@ -5,45 +5,83 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-} from 'react-native';
-import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
-import Octicons from 'react-native-vector-icons/Octicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Zocial from 'react-native-vector-icons/Zocial';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+} from "react-native";
+import React, { useState } from "react";
+import { ScrollView } from "react-native-gesture-handler";
+import Octicons from "react-native-vector-icons/Octicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Zocial from "react-native-vector-icons/Zocial";
+import { Loading } from "../../../components/Loading";
+import { signin } from "../../../redux/actions/auth";
+import { fb, google, logo1 } from "../../../assets";
+import colors from "../../../theme/colors";
+import { useNavigation } from "@react-navigation/native";
+import { connect } from "react-redux";
 
-import {fb, google, logo1} from '../../../assets';
-import colors from '../../../theme/colors';
-import {useNavigation} from '@react-navigation/native';
-const Login = () => {
+const Login = ({ signin }) => {
   const navigation = useNavigation();
+  const [number, setnumber] = useState("");
+  const [pass, setpass] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (!number) {
+      alert("Kindly Enter your number");
+    } else if (!pass) {
+      alert("Kindly Enter Password");
+    } else {
+      // setLoading(true);
+      const formData = new FormData();
+      formData.append("mobile_no", number);
+      formData.append("password", pass);
+      formData.append("status", "0");
+      console.log("LoginData", formData);
+      try {
+        const res = await signin(formData);
+        console.log("response", res);
+        if (res.data.status === true) {
+          navigation.navigate("Home");
+          setLoading(false);
+        } else {
+          alert(res.data.message);
+          setLoading(false);
+        }
+      } catch (e) {
+        alert(e);
+      }
+    }
+  };
   return (
     <ScrollView style={styles.container}>
+      <Loading visible={loading} />
+
       <View
         style={{
           flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: "center",
+          alignItems: "center",
           marginVertical: 100,
-        }}>
+        }}
+      >
         <Image
           source={logo1}
           resizeMode="contain"
-          styles={{width: 100, height: 100}}
+          styles={{ width: 100, height: 100 }}
         />
       </View>
-      <View style={{flex: 1, backgroundColor: 'white', marginTop: 100}}>
+      <View style={{ flex: 1, backgroundColor: "white", marginTop: 20 }}>
         {/* <View style={{flex: 1, backgroundColor: 'white'}}> */}
 
-        <View style={{overflow: 'hidden', paddingBottom: 5}}>
+        <View style={{ overflow: "hidden", paddingBottom: 5 }}>
           <TextInput
             style={styles.input}
-            placeholder="Name"
+            placeholder="Number"
             textAlign="center"
             textAlignVertical="center"
-            placeholderTextColor={'black'}
+            placeholderTextColor={"black"}
+            onChangeText={(e) => setnumber(e)}
+            value={number}
           />
 
           <Octicons
@@ -53,13 +91,16 @@ const Login = () => {
             color="#000"
           />
         </View>
-        <View style={{overflow: 'hidden', paddingBottom: 5}}>
+        <View style={{ overflow: "hidden", paddingBottom: 5 }}>
           <TextInput
             style={styles.input}
             placeholder="Password"
             textAlign="center"
             textAlignVertical="center"
-            placeholderTextColor={'black'}
+            placeholderTextColor={"black"}
+            onChangeText={(e) => setpass(e)}
+            value={pass}
+            secureTextEntry={true}
           />
           <MaterialIcons
             style={styles.lock1}
@@ -69,49 +110,53 @@ const Login = () => {
           />
         </View>
       </View>
-      <View style={{flex: 1}}>
-        <View style={{flexDirection: 'row', marginHorizontal: 20}}>
+      <View style={{ flex: 1 }}>
+        <View style={{ flexDirection: "row", marginHorizontal: 20 }}>
           <View
-            style={{width: '50%', flexDirection: 'row', alignItems: 'center'}}>
+            style={{ width: "50%", flexDirection: "row", alignItems: "center" }}
+          >
             <MaterialCommunityIcons
               name="checkbox-blank-outline"
-              color={'black'}
+              color={"black"}
               size={16}
             />
-            <Text style={{paddingLeft: 3, color: 'black'}}>Remember me</Text>
+            <Text style={{ paddingLeft: 3, color: "black" }}>Remember me</Text>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ResetPassword')}
-            style={{width: '50%', alignItems: 'flex-end'}}>
-            <Text style={{color: 'black'}}>Forgot password?</Text>
+            onPress={() => navigation.navigate("ResetPassword")}
+            style={{ width: "50%", alignItems: "flex-end" }}
+          >
+            <Text style={{ color: "black" }}>Forgot password?</Text>
           </TouchableOpacity>
         </View>
         <View
           style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'hidden',
+            justifyContent: "center",
+            alignItems: "center",
+            overflow: "hidden",
             paddingBottom: 5,
-          }}>
+          }}
+        >
           <TouchableOpacity
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => handleLogin()}
             style={{
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: "center",
+              alignItems: "center",
               backgroundColor: colors.secondary,
-              width: '50%',
+              width: "50%",
               height: 30,
               borderRadius: 7,
               marginTop: 60,
               elevation: 8,
               borderRadius: 3,
-              shadowColor: '#000',
-              shadowOffset: {width: 1, height: 1},
+              shadowColor: "#000",
+              shadowOffset: { width: 1, height: 1 },
               shadowOpacity: 0.4,
               shadowRadius: 3,
               elevation: 4,
-            }}>
-            <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               Sign In
             </Text>
           </TouchableOpacity>
@@ -131,22 +176,24 @@ const Login = () => {
           </View>
         </View> */}
         <TouchableOpacity
-          onPress={() => navigation.navigate('SignupCopy')}
+          onPress={() => navigation.navigate("SignupCopy")}
           style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
             marginBottom: 10,
             marginTop: 20,
-          }}>
-          <Text style={{color: 'black'}}>Don't have an account?</Text>
+          }}
+        >
+          <Text style={{ color: "black" }}>Don't have an account?</Text>
           <Text
             style={{
-              color: '#df0300',
-              fontWeight: 'bold',
+              color: "#df0300",
+              fontWeight: "bold",
               fontSize: 16,
               paddingLeft: 5,
-            }}>
+            }}
+          >
             Sign Up
           </Text>
         </TouchableOpacity>
@@ -154,34 +201,39 @@ const Login = () => {
     </ScrollView>
   );
 };
-
-export default Login;
+const mapStateToProps = (state) => {
+  const { user } = state.auth;
+  return { user };
+};
+export default connect(mapStateToProps, {
+  signin,
+})(Login);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
 
   input: {
     borderBottomWidth: 1,
-    borderBottomColor: 'black',
+    borderBottomColor: "black",
     marginHorizontal: 10,
 
     borderRadius: 3,
 
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     height: 50,
-    shadowColor: '#000',
-    shadowOffset: {width: 1, height: 1},
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
     shadowRadius: 3,
     elevation: 6,
   },
-  person: {position: 'absolute', left: 20, top: 15},
-  call: {position: 'absolute', top: 25, left: 20},
-  lock: {position: 'absolute', top: 15, left: 20},
-  lock1: {position: 'absolute', top: 15, left: 20},
-  eye: {position: 'absolute', right: 20, top: 25},
-  eye1: {position: 'absolute', right: 20, top: 25},
+  person: { position: "absolute", left: 20, top: 15 },
+  call: { position: "absolute", top: 25, left: 20 },
+  lock: { position: "absolute", top: 15, left: 20 },
+  lock1: { position: "absolute", top: 15, left: 20 },
+  eye: { position: "absolute", right: 20, top: 25 },
+  eye1: { position: "absolute", right: 20, top: 25 },
 });

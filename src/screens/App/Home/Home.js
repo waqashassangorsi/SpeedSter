@@ -8,20 +8,20 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
   FlatList,
-} from 'react-native';
-import Geolocation from 'react-native-geolocation-service';
-import React, {useState, useRef, useEffect} from 'react';
-import {Header} from 'react-native-elements';
-import Octicons from 'react-native-vector-icons/Octicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Foundation from 'react-native-vector-icons/Foundation';
-import Entypo from 'react-native-vector-icons/Entypo';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Contacts from 'react-native-contacts';
-import ListItem from '../../../components/ListItem';
+} from "react-native";
+import Geolocation from "react-native-geolocation-service";
+import React, { useState, useRef, useEffect } from "react";
+import { Header } from "react-native-elements";
+import Octicons from "react-native-vector-icons/Octicons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Fontisto from "react-native-vector-icons/Fontisto";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Foundation from "react-native-vector-icons/Foundation";
+import Entypo from "react-native-vector-icons/Entypo";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Contacts from "react-native-contacts";
+import ListItem from "../../../components/ListItem";
 import {
   blacklogo,
   solid,
@@ -34,19 +34,19 @@ import {
   checkmark,
   cross,
   cross1,
-} from '../../../assets';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import BottomTab from '../../../components/BottomTab';
-import {ScrollView} from 'react-native-gesture-handler';
-import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
-import colors from '../../../theme/colors';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {Calendar} from 'react-native-calendars';
-import {CalendarList} from 'react-native-calendars';
-import Modal from 'react-native-modal';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import {useNavigation} from '@react-navigation/native';
-import RBSheet from 'react-native-raw-bottom-sheet';
+} from "../../../assets";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import BottomTab from "../../../components/BottomTab";
+import { ScrollView } from "react-native-gesture-handler";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+import colors from "../../../theme/colors";
+import Carousel, { Pagination } from "react-native-snap-carousel";
+import { Calendar } from "react-native-calendars";
+import { CalendarList } from "react-native-calendars";
+import Modal from "react-native-modal";
+// import DateTimePicker from '@react-native-community/datetimepicker';
+import { useNavigation } from "@react-navigation/native";
+import RBSheet from "react-native-raw-bottom-sheet";
 
 const Data = [1, 2, 3];
 const SLIDER_WIDTH = 400;
@@ -56,19 +56,19 @@ const requestLocationPermission = async () => {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
-        title: 'Geolocation Permission',
-        message: 'Can we access your location?',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      },
+        title: "Geolocation Permission",
+        message: "Can we access your location?",
+        buttonNeutral: "Ask Me Later",
+        buttonNegative: "Cancel",
+        buttonPositive: "OK",
+      }
     );
-    console.log('granted', granted);
-    if (granted === 'granted') {
-      console.log('You can use Geolocation');
+    console.log("granted", granted);
+    if (granted === "granted") {
+      console.log("You can use Geolocation");
       return true;
     } else {
-      console.log('You cannot use Geolocation');
+      console.log("You cannot use Geolocation");
       return false;
     }
   } catch (err) {
@@ -81,7 +81,7 @@ const Home = () => {
   const [isModalVisible1, setModalVisible1] = useState(false);
   const [modal, setmodal] = useState(false);
   const [mydate, setDate] = useState(new Date());
-  const [displaymode, setMode] = useState('time');
+  const [displaymode, setMode] = useState("time");
   const [isDisplayDate, setShow] = useState(false);
   const [location, setLocation] = useState(false);
   const refRBSheet = useRef();
@@ -96,55 +96,57 @@ const Home = () => {
     longitudeDelta: 0.01,
   });
   const marked = {
-    '2023-03-07': {marked: true},
-    '2023-03-07': {
+    "2023-03-07": { marked: true },
+    "2023-03-07": {
       selected: true,
-      selectedColor: '#aa2222',
-      selectedTextColor: 'white',
+      selectedColor: "#aa2222",
+      selectedTextColor: "white",
     },
   };
   const changeSelectedDate = (event, selectedDate) => {
     const currentDate = selectedDate || mydate;
     setDate(currentDate);
   };
-  const showMode = currentMode => {
+  const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
   };
   const displayDatepicker = () => {
-    showMode('time');
+    showMode("time");
   };
-  const renderItem = ({title}) => (
-    <View style={{flexDirection: 'row', marginLeft: 10}}>
+  const renderItem = ({ title }) => (
+    <View style={{ flexDirection: "row", marginLeft: 10 }}>
       <View
         style={{
-          backgroundColor: '#ffe1e4',
+          backgroundColor: "#ffe1e4",
           paddingVertical: 10,
           paddingHorizontal: 45,
           borderTopLeftRadius: 10,
           borderBottomLeftRadius: 10,
-        }}>
-        <Text style={{color: 'black', fontSize: 16, marginLeft: -20}}>
+        }}
+      >
+        <Text style={{ color: "black", fontSize: 16, marginLeft: -20 }}>
           100 % of on your
         </Text>
         <Text
           style={{
             color: colors.primary,
             fontSize: 22,
-            fontWeight: 'bold',
+            fontWeight: "bold",
             paddingVertical: 5,
             marginLeft: -20,
-          }}>
+          }}
+        >
           First Delivery
         </Text>
-        <Text style={{color: 'black', marginLeft: -20}}>
+        <Text style={{ color: "black", marginLeft: -20 }}>
           by using promo 1003
         </Text>
       </View>
       <View style={{}}>
         <Image
           source={Person1}
-          style={{borderRadius: 10, width: 133, height: 140}}
+          style={{ borderRadius: 10, width: 133, height: 140 }}
           resizeMode="cover"
         />
       </View>
@@ -152,30 +154,30 @@ const Home = () => {
   );
   const getLocation = () => {
     const result = requestLocationPermission();
-    result.then(res => {
-      console.log('res is:', res);
+    result.then((res) => {
+      console.log("res is:", res);
       if (res) {
         Geolocation.getCurrentPosition(
-          position => {
+          (position) => {
             console.log(position);
             setLocation(position);
           },
-          error => {
+          (error) => {
             // See error code charts below.
             console.log(error.code, error.message);
             setLocation(false);
           },
-          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );
       }
     });
     console.log(location);
   };
   useEffect(() => {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-        title: 'Contacts',
-        message: 'This app would like to view your contacts.',
+        title: "Contacts",
+        message: "This app would like to view your contacts.",
       }).then(() => {
         loadContacts();
       });
@@ -186,19 +188,19 @@ const Home = () => {
 
   const loadContacts = () => {
     Contacts.getAll()
-      .then(contacts => {
+      .then((contacts) => {
         contacts.sort(
-          (a, b) => a.givenName.toLowerCase() > b.givenName.toLowerCase(),
+          (a, b) => a.givenName.toLowerCase() > b.givenName.toLowerCase()
         );
         setContacts(contacts);
       })
-      .catch(e => {
-        alert('Permission to access contacts was denied');
-        console.warn('Permission to access contacts was denied');
+      .catch((e) => {
+        alert("Permission to access contacts was denied");
+        console.warn("Permission to access contacts was denied");
       });
   };
 
-  const openContact = contact => {
+  const openContact = (contact) => {
     console.log(JSON.stringify(contact));
     Contacts.openExistingContact(contact);
   };
@@ -209,15 +211,15 @@ const Home = () => {
     setModalVisible1(false);
   };
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <Header
         containerStyle={{}}
-        backgroundColor={'transparent'}
+        backgroundColor={"transparent"}
         leftComponent={
           <Octicons
-            name={'three-bars'}
+            name={"three-bars"}
             size={30}
-            color={'black'}
+            color={"black"}
             style={{}}
             onPress={() => navigation.openDrawer()}
           />
@@ -225,24 +227,24 @@ const Home = () => {
         centerComponent={<Image source={blacklogo} resizeMode="contain" />}
         rightComponent={
           <MaterialCommunityIcons
-            name={'gift'}
+            name={"gift"}
             size={30}
-            color={'black'}
+            color={"black"}
             style={{}}
           />
         }
       />
       <ScrollView style={{}}>
-        <View style={{marginVertical: 10}}>
+        <View style={{ marginVertical: 10 }}>
           <Carousel
             ref={isCarousel}
             data={Data}
             renderItem={renderItem}
             sliderWidth={SLIDER_WIDTH}
             itemWidth={ITEM_WIDTH}
-            onSnapToItem={index => setIndex(index)}
+            onSnapToItem={(index) => setIndex(index)}
           />
-          <View style={{position: 'absolute', bottom: 0, left: 5}}>
+          <View style={{ position: "absolute", bottom: 0, left: 5 }}>
             <Pagination
               dotsLength={Data.length}
               activeDotIndex={index}
@@ -258,7 +260,7 @@ const Home = () => {
               }}
               tappableDots={true}
               inactiveDotStyle={{
-                backgroundColor: 'black',
+                backgroundColor: "black",
                 // Define styles for inactive dots here
               }}
               inactiveDotOpacity={0.4}
@@ -268,104 +270,112 @@ const Home = () => {
         </View>
         <View
           style={{
-            flexDirection: 'row',
-            backgroundColor: '#F4F4F4',
+            flexDirection: "row",
+            backgroundColor: "#F4F4F4",
             marginHorizontal: 10,
             borderRadius: 10,
             paddingVertical: 10,
-          }}>
-          <View style={{paddingLeft: 15}}>
+          }}
+        >
+          <View style={{ paddingLeft: 15 }}>
             <Image source={solid} />
           </View>
-          <View style={{paddingLeft: 10}}>
-            <Text style={{color: '#444444'}}>Turn on your location</Text>
-            <Text style={{color: '#444444'}}>
+          <View style={{ paddingLeft: 10 }}>
+            <Text style={{ color: "#444444" }}>Turn on your location</Text>
+            <Text style={{ color: "#444444" }}>
               Let speedster app access to your locatin
             </Text>
             <TouchableOpacity
               onPress={getLocation}
               style={{
-                backgroundColor: '#D9D9D9',
-                width: '60%',
+                backgroundColor: "#D9D9D9",
+                width: "60%",
                 padding: 5,
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: "center",
+                alignItems: "center",
                 borderRadius: 20,
                 marginVertical: 10,
-              }}>
-              <Text style={{color: 'black'}}>Turn on location</Text>
+              }}
+            >
+              <Text style={{ color: "black" }}>Turn on location</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{marginHorizontal: 10}}>
+        <View style={{ marginHorizontal: 10 }}>
           <Text
             style={{
-              color: 'black',
+              color: "black",
               paddingTop: 15,
               fontSize: 15,
-              fontWeight: 'bold',
-            }}>
+              fontWeight: "bold",
+            }}
+          >
             Select Package
           </Text>
           <View
             style={{
               marginTop: 15,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
             <View
               style={{
-                width: '31%',
-                backgroundColor: '#ffefe5',
+                width: "31%",
+                backgroundColor: "#ffefe5",
                 borderRadius: 15,
                 paddingHorizontal: 8,
                 paddingVertical: 12,
-              }}>
+              }}
+            >
               <Image source={promo} style={{}} />
-              <Image source={car} style={{alignSelf: 'flex-end'}} />
-              <Text style={{color: 'black'}}>Small</Text>
+              <Image source={car} style={{ alignSelf: "flex-end" }} />
+              <Text style={{ color: "black" }}>Small</Text>
             </View>
             <View
               style={{
-                width: '31%',
-                backgroundColor: '#f0f6ff',
+                width: "31%",
+                backgroundColor: "#f0f6ff",
                 borderRadius: 15,
                 paddingHorizontal: 8,
                 paddingVertical: 12,
-              }}>
+              }}
+            >
               <Image
                 source={bus}
-                style={{alignSelf: 'flex-end', marginTop: 17}}
+                style={{ alignSelf: "flex-end", marginTop: 17 }}
               />
-              <Text style={{color: 'black', paddingTop: 2}}>Medium</Text>
+              <Text style={{ color: "black", paddingTop: 2 }}>Medium</Text>
             </View>
             <View
               style={{
-                width: '31%',
-                backgroundColor: '#fffee7',
+                width: "31%",
+                backgroundColor: "#fffee7",
                 borderRadius: 15,
                 paddingHorizontal: 8,
                 paddingVertical: 12,
-              }}>
+              }}
+            >
               <Image
                 source={truck}
-                style={{alignSelf: 'flex-end', marginTop: 17}}
+                style={{ alignSelf: "flex-end", marginTop: 17 }}
               />
-              <Text style={{color: 'black', paddingTop: 2}}>Large</Text>
+              <Text style={{ color: "black", paddingTop: 2 }}>Large</Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: 'row',
+              flexDirection: "row",
               marginHorizontal: 15,
               marginVertical: 20,
-            }}>
-            <View style={{width: '10%', paddingTop: 20}}>
+            }}
+          >
+            <View style={{ width: "10%", paddingTop: 20 }}>
               <View>
                 <FontAwesome
                   name="circle"
-                  color={'#d9d9d9'}
-                  style={{paddingLeft: 5}}
+                  color={"#d9d9d9"}
+                  style={{ paddingLeft: 5 }}
                 />
               </View>
               <View
@@ -374,16 +384,17 @@ const Home = () => {
                   borderLeftColor: colors.primary,
                   height: 50,
                   marginLeft: 9,
-                }}></View>
+                }}
+              ></View>
 
               <View>
                 <MaterialCommunityIcons
                   name="square"
                   color={colors.primary}
-                  style={{paddingLeft: 5}}
+                  style={{ paddingLeft: 5 }}
                 />
               </View>
-              <View style={{paddingTop: 35}}>
+              <View style={{ paddingTop: 35 }}>
                 <AntDesign
                   name="calendar"
                   color={colors.primary}
@@ -395,17 +406,19 @@ const Home = () => {
                 />
               </View>
             </View>
-            <View style={{width: '80%'}}>
+            <View style={{ width: "80%" }}>
               <TouchableOpacity
-                onPress={() => navigation.navigate('SaveLocation')}
-                style={styles.input}>
-                <Text style={{paddingTop: 10}}>Select Pick up</Text>
+                onPress={() => navigation.navigate("SaveLocation")}
+                style={styles.input}
+              >
+                <Text style={{ paddingTop: 10 }}>Select Pick up</Text>
               </TouchableOpacity>
               <View>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('SaveLocation')}
-                  style={styles.input}>
-                  <Text style={{paddingTop: 10}}>Select drop off</Text>
+                  onPress={() => navigation.navigate("SaveLocation")}
+                  style={styles.input}
+                >
+                  <Text style={{ paddingTop: 10 }}>Select drop off</Text>
                 </TouchableOpacity>
                 <AntDesign
                   style={styles.plus}
@@ -417,13 +430,13 @@ const Home = () => {
               <TextInput
                 style={styles.input}
                 placeholder="When"
-                placeholderTextColor={'black'}
+                placeholderTextColor={"black"}
               />
               <View>
                 <TextInput
                   style={styles.input}
                   placeholder="Add multiple delivery"
-                  placeholderTextColor={'black'}
+                  placeholderTextColor={"black"}
                 />
 
                 <EvilIcons
@@ -437,7 +450,7 @@ const Home = () => {
                 <TextInput
                   style={styles.input}
                   placeholder="Add multiple delivery"
-                  placeholderTextColor={'black'}
+                  placeholderTextColor={"black"}
                 />
 
                 <EvilIcons
@@ -448,38 +461,40 @@ const Home = () => {
                 />
               </View>
             </View>
-            <View style={{width: '10%', paddingTop: 40}}>
+            <View style={{ width: "10%", paddingTop: 40 }}>
               <View>
-                <Fontisto name="arrow-v" color={'black'} size={20} />
+                <Fontisto name="arrow-v" color={"black"} size={20} />
               </View>
             </View>
           </View>
         </View>
         <View
           style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'hidden',
+            justifyContent: "center",
+            alignItems: "center",
+            overflow: "hidden",
             paddingBottom: 10,
-          }}>
+          }}
+        >
           <TouchableOpacity
-            onPress={() => navigation.navigate('ParcelDetail')}
+            onPress={() => navigation.navigate("ParcelDetail")}
             style={{
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: "center",
+              alignItems: "center",
               backgroundColor: colors.secondary,
-              width: '50%',
+              width: "50%",
               height: 30,
               borderRadius: 7,
               elevation: 8,
               borderRadius: 3,
-              shadowColor: '#000',
-              shadowOffset: {width: 1, height: 1},
+              shadowColor: "#000",
+              shadowOffset: { width: 1, height: 1 },
               shadowOpacity: 0.4,
               shadowRadius: 3,
               elevation: 4,
-            }}>
-            <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               Continue
             </Text>
           </TouchableOpacity>
@@ -487,50 +502,60 @@ const Home = () => {
         <View style={{}}>
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
+              flexDirection: "row",
+              alignItems: "center",
               marginHorizontal: 15,
-            }}>
+            }}
+          >
             <View
               style={{
-                backgroundColor: '#eeeeee',
-                width: '10%',
+                backgroundColor: "#eeeeee",
+                width: "10%",
                 borderRadius: 30,
                 padding: 5,
-              }}>
-              <Fontisto name="home" size={22} style={{alignSelf: 'center'}} />
+              }}
+            >
+              <Fontisto name="home" size={22} style={{ alignSelf: "center" }} />
             </View>
             <View>
               <Text
-                style={{paddingLeft: 20, color: 'black', fontWeight: 'bold'}}>
+                style={{ paddingLeft: 20, color: "black", fontWeight: "bold" }}
+              >
                 Home
               </Text>
-              <Text style={{paddingLeft: 20}}>1725 Naud Street</Text>
+              <Text style={{ paddingLeft: 20 }}>1725 Naud Street</Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
+              flexDirection: "row",
+              alignItems: "center",
               marginHorizontal: 15,
 
               marginVertical: 10,
-            }}>
+            }}
+          >
             <View
               style={{
-                backgroundColor: '#eeeeee',
-                width: '10%',
+                backgroundColor: "#eeeeee",
+                width: "10%",
                 borderRadius: 30,
                 padding: 5,
-              }}>
-              <Foundation name="star" size={22} style={{alignSelf: 'center'}} />
+              }}
+            >
+              <Foundation
+                name="star"
+                size={22}
+                style={{ alignSelf: "center" }}
+              />
             </View>
             <View>
               <Text
-                style={{paddingLeft: 20, color: 'black', fontWeight: 'bold'}}>
+                style={{ paddingLeft: 20, color: "black", fontWeight: "bold" }}
+              >
                 Bestia
               </Text>
-              <Text style={{paddingLeft: 20}}>
+              <Text style={{ paddingLeft: 20 }}>
                 Italian Resturant 2121 E 7th PI
               </Text>
             </View>
@@ -539,11 +564,12 @@ const Home = () => {
         <Text
           style={{
             paddingHorizontal: 15,
-            color: 'black',
+            color: "black",
             fontSize: 16,
-            fontWeight: 'bold',
+            fontWeight: "bold",
             paddingTop: 20,
-          }}>
+          }}
+        >
           Nearby
         </Text>
         <View
@@ -552,7 +578,8 @@ const Home = () => {
             marginTop: 10,
             //  marginBottom: 300,
             marginVertical: 30,
-          }}>
+          }}
+        >
           <MapView
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             style={styles.map}
@@ -561,12 +588,13 @@ const Home = () => {
               longitude: -122.4324,
               latitudeDelta: 0.015,
               longitudeDelta: 0.0121,
-            }}>
+            }}
+          >
             <Marker
               coordinate={region}
-              pinColor={'red'} // any color
-              title={'title'}
-              description={'description'}
+              pinColor={"red"} // any color
+              title={"title"}
+              description={"description"}
             />
           </MapView>
         </View>
@@ -574,11 +602,12 @@ const Home = () => {
         <TouchableOpacity
           onPress={() => refRBSheet.current.open()}
           style={{
-            position: 'absolute',
+            position: "absolute",
             bottom: 60,
             right: 0,
-          }}>
-          <Image source={whatsapp} style={{width: 90, height: 90}} />
+          }}
+        >
+          <Image source={whatsapp} style={{ width: 90, height: 90 }} />
         </TouchableOpacity>
         <RBSheet
           ref={refRBSheet}
@@ -587,27 +616,29 @@ const Home = () => {
           height={350}
           customStyles={{
             wrapper: {
-              backgroundColor: 'transparent',
+              backgroundColor: "transparent",
             },
             wrapper: {
-              backgroundColor: 'rgba(52, 52, 52, 0.8)',
+              backgroundColor: "rgba(52, 52, 52, 0.8)",
             },
-          }}>
+          }}
+        >
           <View
             style={{
-              alignItems: 'center',
+              alignItems: "center",
               marginTop: 20,
-            }}>
-            <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
+            }}
+          >
+            <Text style={{ fontSize: 18, fontWeight: "bold", color: "black" }}>
               Receiver Details
             </Text>
           </View>
-          <View style={{marginTop: 30}}>
-            <Text style={{paddingLeft: 10}}>Receiver's Name</Text>
+          <View style={{ marginTop: 30 }}>
+            <Text style={{ paddingLeft: 10 }}>Receiver's Name</Text>
             <TextInput
               style={styles.input1}
               placeholder="Name"
-              placeholderTextColor={'#A4A4A4'}
+              placeholderTextColor={"#A4A4A4"}
             />
             <Octicons
               style={styles.person}
@@ -616,12 +647,12 @@ const Home = () => {
               color="#A4A4A4"
             />
           </View>
-          <View style={{marginTop: 30}}>
-            <Text style={{paddingLeft: 10}}>Receiver's Name</Text>
+          <View style={{ marginTop: 30 }}>
+            <Text style={{ paddingLeft: 10 }}>Receiver's Name</Text>
             <TextInput
               style={styles.input1}
               placeholder="Number"
-              placeholderTextColor={'#A4A4A4'}
+              placeholderTextColor={"#A4A4A4"}
             />
 
             <MaterialIcons
@@ -641,32 +672,35 @@ const Home = () => {
           <TouchableOpacity
             style={{
               backgroundColor: colors.secondary,
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: "center",
+              alignItems: "center",
               padding: 7,
               marginVertical: 20,
               marginHorizontal: 30,
               borderRadius: 20,
-            }}>
+            }}
+          >
             <Image source={checkmark} />
           </TouchableOpacity>
         </RBSheet>
         <Modal
           animationType="slide"
           transparent={true}
-          isVisible={isModalVisible}>
+          isVisible={isModalVisible}
+        >
           <View
             style={{
-              backgroundColor: '#FBFBFB',
+              backgroundColor: "#FBFBFB",
               borderRadius: 20,
               borderWidth: 1,
               paddingVertical: 10,
               // flex: Platform.OS == "android" ? 0.5 : 0.5,
-            }}>
+            }}
+          >
             <Entypo
-              name={'cross'}
+              name={"cross"}
               size={30}
-              color={'black'}
+              color={"black"}
               onPress={() => setModalVisible(false)}
             />
             <Calendar
@@ -676,7 +710,7 @@ const Home = () => {
             />
           </View>
         </Modal>
-        {isDisplayDate && (
+        {/* {isDisplayDate && (
           <DateTimePicker
             testID="dateTimePicker"
             value={mydate}
@@ -685,20 +719,21 @@ const Home = () => {
             display="default"
             onChange={changeSelectedDate}
           />
-        )}
+        )} */}
       </ScrollView>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <Modal
           animationType="slide"
           transparent={true}
-          isVisible={isModalVisible1}>
+          isVisible={isModalVisible1}
+        >
           <View
             style={{
-              justifyContent: 'center',
-              backgroundColor: 'white',
+              justifyContent: "center",
+              backgroundColor: "white",
               borderRadius: 10,
 
-              shadowColor: '#000',
+              shadowColor: "#000",
               shadowOffset: {
                 width: 0,
                 height: 2,
@@ -707,17 +742,20 @@ const Home = () => {
               shadowRadius: 4,
               elevation: 5,
               paddingBottom: 60,
-            }}>
+            }}
+          >
             <View
               style={{
-                alignItems: 'flex-end',
+                alignItems: "flex-end",
                 paddingRight: 10,
                 paddingTop: 20,
-              }}>
+              }}
+            >
               <TouchableOpacity
                 onPress={() => {
                   closemodal();
-                }}>
+                }}
+              >
                 <Image
                   source={cross1}
                   resizemode="contain"
@@ -730,9 +768,9 @@ const Home = () => {
             </View>
             <FlatList
               data={contacts}
-              renderItem={contact => {
+              renderItem={(contact) => {
                 {
-                  console.log('contact -> ' + JSON.stringify(contact));
+                  console.log("contact -> " + JSON.stringify(contact));
                 }
                 return (
                   <ListItem
@@ -742,7 +780,7 @@ const Home = () => {
                   />
                 );
               }}
-              keyExtractor={item => item.recordID}
+              keyExtractor={(item) => item.recordID}
             />
           </View>
         </Modal>
@@ -758,16 +796,16 @@ const styles = StyleSheet.create({
   input: {
     height: 45,
     borderWidth: 1,
-    borderColor: 'gray',
-    backgroundColor: 'white',
+    borderColor: "gray",
+    backgroundColor: "white",
     borderRadius: 20,
     paddingLeft: 10,
     marginVertical: 5,
   },
-  plus: {position: 'absolute', right: 0, top: 30},
+  plus: { position: "absolute", right: 0, top: 30 },
   map: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     marginBottom: 300,
   },
   // map: {
@@ -775,17 +813,17 @@ const styles = StyleSheet.create({
   // },
   input1: {
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     height: 50,
-    shadowColor: '#000',
-    shadowOffset: {width: 1, height: 1},
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
     shadowRadius: 3,
     elevation: 6,
     paddingLeft: 50,
     marginTop: 10,
   },
-  person: {position: 'absolute', left: 20, top: 43},
-  eye: {position: 'absolute', right: 20, top: 43},
-  lock: {position: 'absolute', top: 43, left: 20},
+  person: { position: "absolute", left: 20, top: 43 },
+  eye: { position: "absolute", right: 20, top: 43 },
+  lock: { position: "absolute", top: 43, left: 20 },
 });

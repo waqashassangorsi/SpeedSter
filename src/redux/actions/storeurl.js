@@ -1,2 +1,2 @@
-export const storeurl = "https://taximat.bg/Admin/Authentication/";
-export const baseurl = "https://taximat.bg/Admin/";
+export const storeurl = "https://book2say.com/speedster/";
+export const baseurl = "https://book2say.com/speedster/";

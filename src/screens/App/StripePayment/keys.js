@@ -1,0 +1,9 @@
+export const STRIPE_PUBLISHABLE_KEY =
+  "pk_test_51HvmvWCFLwW8wbDlWNnaj4wQd8TKt7JmkG4vHoGzx0YE8ZWDXvQ8d8g2jwSQUHG5xlKwLT3XCMVZWjzsON1JaqT40086J0H9BD";
+export const Secret_key =
+  "sk_test_51HvmvWCFLwW8wbDl8MnALtHHbs5car5VeTDwmmQISZhrzf6Pb3olriZfhIwk09zmKvctwXjoRAbRhG5KQwL9HSQO00WSUg4uJX";
+//testisabove
+// export const STRIPE_PUBLISHABLE_KEY =
+//   "pk_live_51IkrMqHOVohhJwm3XfQ6nLQlXa5ZVSnjacPxCttvSjHlgSnS0SKUgqFAmqC9jdAWu05XWea38UEDwRQKw8IrA4vX00vdnPJUHK";
+// export const Secret_key =
+//   "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";

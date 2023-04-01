@@ -7,21 +7,23 @@ import {
   TextInput,
   Modal,
   Alert,
-} from 'react-native';
-import React, {useState, useRef} from 'react';
-import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
-import {Header, Badge} from 'react-native-elements';
-import Octicons from 'react-native-vector-icons/Octicons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Foundation from 'react-native-vector-icons/Foundation';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+} from "react-native";
+import React, { useState, useRef } from "react";
+import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
+
+import { Header, Badge } from "react-native-elements";
+import Octicons from "react-native-vector-icons/Octicons";
+import Entypo from "react-native-vector-icons/Entypo";
+import Foundation from "react-native-vector-icons/Foundation";
+import Fontisto from "react-native-vector-icons/Fontisto";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 // import Modal from 'react-native-modal';
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useNavigation} from '@react-navigation/native';
-import AlertModal from '../../../components/AlertModal';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useNavigation } from "@react-navigation/native";
+import AlertModal from "../../../components/AlertModal";
 import {
   blacklogo,
   cross,
@@ -32,11 +34,13 @@ import {
   call,
   cross1,
   messagedp,
-} from '../../../assets';
-import BottomTab from '../../../components/BottomTab';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import {ScrollView} from 'react-native-gesture-handler';
-import colors from '../../../theme/colors';
+  startmarker,
+  endmarker,
+} from "../../../assets";
+import BottomTab from "../../../components/BottomTab";
+import RBSheet from "react-native-raw-bottom-sheet";
+import { ScrollView } from "react-native-gesture-handler";
+import colors from "../../../theme/colors";
 
 const Trackparcel = () => {
   const refRBSheet = useRef();
@@ -52,27 +56,38 @@ const Trackparcel = () => {
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   });
+  const [coordinates] = useState([
+    {
+      latitude: 33.597833952195714,
+      longitude: 73.04623526185422,
+    },
+    {
+      latitude: 33.664024011449236,
+      longitude: 73.08680157543795,
+    },
+  ]);
+  const GOOGLE_API_KEY = "AIzaSyBZmuNL-9NHHZSvuQPb4hsBqP5pJBm8-QM";
   const [showAlert, setShowAlert] = useState(false);
   return (
     <View style={styles.container}>
       <Header
         containerStyle={{}}
-        backgroundColor={'transparent'}
+        backgroundColor={"transparent"}
         leftComponent={
-          <Octicons name={'three-bars'} size={30} color={'black'} style={{}} />
+          <Octicons name={"three-bars"} size={30} color={"black"} style={{}} />
         }
         centerComponent={
           <Image
             source={blacklogo}
             resizeMode="contain"
-            styles={{width: 50, height: 50}}
+            styles={{ width: 50, height: 50 }}
           />
         }
         rightComponent={
           <MaterialCommunityIcons
-            name={'gift'}
+            name={"gift"}
             size={30}
-            color={'black'}
+            color={"black"}
             style={{}}
           />
         }
@@ -82,7 +97,7 @@ const Trackparcel = () => {
         status="warning"
         value="1"
         containerStyle={{
-          position: 'absolute',
+          position: "absolute",
           right: 27,
           top: 42,
           scaleX: 0.6,
@@ -91,58 +106,98 @@ const Trackparcel = () => {
       />
       <View
         style={{
-          alignItems: 'center',
+          alignItems: "center",
           marginVertical: 10,
-        }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+        }}
+      >
+        <Text style={{ fontSize: 20, fontWeight: "bold", color: "black" }}>
           Track Parcel
         </Text>
       </View>
       <Entypo
-        name={'cross'}
+        name={"cross"}
         size={30}
-        color={'black'}
-        style={{position: 'absolute', right: 6, top: 106}}
+        color={"black"}
+        style={{ position: "absolute", right: 6, top: 106 }}
       />
       <MapView
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={styles.map}
-        region={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+        initialRegion={{
+          latitude: coordinates[0].latitude,
+          longitude: coordinates[0].longitude,
           latitudeDelta: 0.015,
           longitudeDelta: 0.0121,
-        }}>
-        <Marker
+        }}
+      >
+        {/* <Marker
           coordinate={region}
           pinColor={'red'} // any color
           title={'title'}
           description={'description'}
+        /> */}
+        {/* <Polyline
+          coordinates={[
+            { latitude: 33.597833952195714, longitude: 73.04623526185422 },
+            { latitude: 33.664024011449236, longitude: 73.08680157543795 },
+            // { latitude: 37.72825, longitude: -122.4324 },
+          ]}
+          strokeColor="#7F0000" // fallback for when `strokeColors` is not supported by the map-provider
+          strokeColors={[
+            "#7F0000",
+            "#00000000", // no color, creates a "long" gradient between the previous and next coordinate
+            "#B24112",
+            "#E5845C",
+            "#238C23",
+            "#7F0000",
+          ]}
+          strokeWidth={6}
+          lineCap="round"
+        /> */}
+        <MapViewDirections
+          origin={coordinates[0]}
+          destination={coordinates[1]}
+          apikey={GOOGLE_API_KEY} // insert your API Key here
+          strokeWidth={4}
+          strokeColor="#111111"
         />
+        <Marker coordinate={coordinates[0]}>
+          <Image
+            source={startmarker}
+            style={{ width: 60, height: 60, marginLeft: -10, marginTop: 7 }}
+            resizeMode="contain"
+          />
+        </Marker>
+        <Marker coordinate={coordinates[1]}>
+          <Image source={endmarker} style={{ width: 50, height: 50 }} />
+        </Marker>
       </MapView>
       <TouchableOpacity
         onPress={() => setModalVisible2(true)}
         style={{
-          position: 'absolute',
+          position: "absolute",
           right: 8,
           bottom: 430,
-        }}>
+        }}
+      >
         <Image source={whatsapp} />
       </TouchableOpacity>
       <View
         style={{
-          position: 'absolute',
-          backgroundColor: '#c70118',
+          position: "absolute",
+          backgroundColor: "#c70118",
           right: 17,
           bottom: 400,
-          width: '45%',
+          width: "45%",
           padding: 8,
           borderRadius: 18,
-        }}>
+        }}
+      >
         <TouchableOpacity
           onPress={() => refRBSheet.current.open()}
-          style={{alignItems: 'center'}}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>
+          style={{ alignItems: "center" }}
+        >
+          <Text style={{ color: "white", fontWeight: "bold" }}>
             Cancel Request
           </Text>
         </TouchableOpacity>
@@ -154,209 +209,227 @@ const Trackparcel = () => {
         height={350}
         customStyles={{
           wrapper: {
-            backgroundColor: 'transparent',
+            backgroundColor: "transparent",
           },
           wrapper: {
-            backgroundColor: 'rgba(52, 52, 52, 0.8)',
+            backgroundColor: "rgba(52, 52, 52, 0.8)",
           },
-        }}>
+        }}
+      >
         <View
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
             paddingHorizontal: 10,
             marginTop: 20,
-          }}>
-          <AntDesign name="arrowleft" color={'black'} size={20} />
-          <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
+          }}
+        >
+          <AntDesign name="arrowleft" color={"black"} size={20} />
+          <Text style={{ fontSize: 18, fontWeight: "bold", color: "black" }}>
             Cancel Delivery
           </Text>
-          <Entypo name={'cross'} size={20} color={'black'} />
+          <Entypo name={"cross"} size={20} color={"black"} />
         </View>
         <Text
           style={{
-            color: 'black',
-            textAlign: 'center',
+            color: "black",
+            textAlign: "center",
             paddingVertical: 10,
-            fontWeight: 'bold',
-          }}>
+            fontWeight: "bold",
+          }}
+        >
           Why do you want to cancel?
         </Text>
-        <ScrollView style={{paddingHorizontal: 10}}>
+        <ScrollView style={{ paddingHorizontal: 10 }}>
           <Text
             style={{
-              color: 'black',
+              color: "black",
               paddingVertical: 9,
-              borderBottomColor: 'gray',
+              borderBottomColor: "gray",
               borderBottomWidth: 1,
-            }}>
+            }}
+          >
             Requested by an accident?
           </Text>
           <Text
             style={{
-              color: 'black',
+              color: "black",
               paddingVertical: 9,
-              borderBottomColor: 'gray',
+              borderBottomColor: "gray",
               borderBottomWidth: 1,
-            }}>
+            }}
+          >
             Selected wrong location?
           </Text>
           <Text
             style={{
-              color: 'black',
+              color: "black",
               paddingVertical: 9,
-              borderBottomColor: 'gray',
+              borderBottomColor: "gray",
               borderBottomWidth: 1,
-              fontWeight: 'bold',
-            }}>
+              fontWeight: "bold",
+            }}
+          >
             Driver is to far away?
           </Text>
           <Text
             style={{
-              color: 'black',
+              color: "black",
               paddingVertical: 9,
-              borderBottomColor: 'gray',
+              borderBottomColor: "gray",
               borderBottomWidth: 1,
-            }}>
+            }}
+          >
             Driver isn't available?
           </Text>
           <Text
             style={{
-              color: 'black',
+              color: "black",
               paddingVertical: 9,
-            }}>
+            }}
+          >
             May be next time?
           </Text>
           <TouchableOpacity
             style={{
-              backgroundColor: 'black',
-              justifyContent: 'center',
-              alignItems: 'center',
+              backgroundColor: "black",
+              justifyContent: "center",
+              alignItems: "center",
               padding: 9,
               marginVertical: 20,
               marginHorizontal: 80,
               borderRadius: 20,
-            }}>
-            <Text style={{color: 'white'}}>Confirm Cancel</Text>
+            }}
+          >
+            <Text style={{ color: "white" }}>Confirm Cancel</Text>
           </TouchableOpacity>
         </ScrollView>
       </RBSheet>
-      <View
+      {/* <View
         style={{
-          position: 'absolute',
-          backgroundColor: 'white',
+          position: "absolute",
+          backgroundColor: "white",
           marginHorizontal: 15,
           paddingVertical: 20,
           bottom: 285,
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
-        }}>
-        <View style={{flexDirection: 'row'}}>
-          <View style={{width: '60%', paddingLeft: 15}}>
+        }}
+      >
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ width: "60%", paddingLeft: 15 }}>
             <Text
               style={{
                 color: colors.secondary,
                 fontSize: 16,
-              }}>
+              }}
+            >
               Your driver has arrived!
             </Text>
           </View>
-          <View style={{width: '40%', alignItems: 'center'}}>
+          <View style={{ width: "40%", alignItems: "center" }}>
             <Text
               style={{
                 color: colors.secondary,
-                fontWeight: 'bold',
+                fontWeight: "bold",
                 fontSize: 18,
-              }}>
+              }}
+            >
               5 min
             </Text>
-            <Text style={{color: colors.secondary}}>Waiting Time</Text>
+            <Text style={{ color: colors.secondary }}>Waiting Time</Text>
           </View>
         </View>
       </View>
       <View
         style={{
-          position: 'absolute',
-          backgroundColor: '#C70118',
+          position: "absolute",
+          backgroundColor: "#C70118",
           marginHorizontal: 15,
           paddingVertical: 20,
           bottom: 180,
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
-        }}>
-        <View style={{flexDirection: 'row'}}>
-          <View style={{width: '50%', paddingLeft: 15}}>
-            <Fontisto name={'stopwatch'} size={22} color={'white'} style={{}} />
+        }}
+      >
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ width: "50%", paddingLeft: 15 }}>
+            <Fontisto name={"stopwatch"} size={22} color={"white"} style={{}} />
           </View>
-          <View style={{width: '50%', paddingLeft: 25}}>
-            <Foundation name={'marker'} size={22} color={'white'} style={{}} />
+          <View style={{ width: "50%", paddingLeft: 25 }}>
+            <Foundation name={"marker"} size={22} color={"white"} style={{}} />
           </View>
         </View>
-        <View style={{flexDirection: 'row', paddingBottom: 10}}>
-          <View style={{width: '50%', paddingLeft: 35}}>
-            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
+        <View style={{ flexDirection: "row", paddingBottom: 10 }}>
+          <View style={{ width: "50%", paddingLeft: 35 }}>
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>
               12:40 PM
             </Text>
-            <Text style={{color: 'white'}}>Delivery Time</Text>
+            <Text style={{ color: "white" }}>Delivery Time</Text>
           </View>
-          <View style={{width: '50%', paddingLeft: 45}}>
-            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 18}}>
+          <View style={{ width: "50%", paddingLeft: 45 }}>
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>
               Naud St
             </Text>
-            <Text style={{color: 'white'}}>Delivery Place</Text>
+            <Text style={{ color: "white" }}>Delivery Place</Text>
           </View>
         </View>
       </View>
       <View
         style={{
-          position: 'absolute',
-          backgroundColor: '#c70118',
+          position: "absolute",
+          backgroundColor: "#c70118",
           bottom: 79,
           paddingVertical: 20,
           marginHorizontal: 7,
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
-        }}>
+        }}
+      >
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: "row",
             paddingHorizontal: 10,
-            justifyContent: 'space-around',
-          }}>
+            justifyContent: "space-around",
+          }}
+        >
           <View
             style={{
-              width: '25%',
+              width: "25%",
               // backgroundColor: 'blue',
-            }}>
+            }}
+          >
             <Image
               source={Person1}
-              style={{width: 60, height: 60, borderRadius: 30 / 2}}
+              style={{ width: 60, height: 60, borderRadius: 30 / 2 }}
               resizeMode="contain"
             />
           </View>
           <View
             style={{
-              width: '40%',
+              width: "40%",
               // backgroundColor: 'pink',
-            }}>
+            }}
+          >
             <Text
               style={{
-                color: 'white',
-                fontWeight: 'bold',
+                color: "white",
+                fontWeight: "bold",
                 fontSize: 18,
                 paddingTop: 6,
-              }}>
+              }}
+            >
               John Adams
             </Text>
-            <Text style={{color: 'white'}}>Delivery boy</Text>
+            <Text style={{ color: "white" }}>Delivery boy</Text>
           </View>
           <TouchableOpacity
             onPress={() => setModalVisible(true)}
             style={{
-              width: '15%',
-              backgroundColor: 'white',
-              shadowColor: '#000',
+              width: "15%",
+              backgroundColor: "white",
+              shadowColor: "#000",
               shadowOffset: {
                 width: 0,
                 height: 2,
@@ -366,23 +439,24 @@ const Trackparcel = () => {
               elevation: 2,
               height: 45,
               borderRadius: 7,
-              justifyContent: 'center',
-            }}>
+              justifyContent: "center",
+            }}
+          >
             <MaterialCommunityIcons
-              name={'message-text-outline'}
+              name={"message-text-outline"}
               size={20}
-              color={'red'}
-              style={{alignSelf: 'center'}}
+              color={"red"}
+              style={{ alignSelf: "center" }}
             />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setModalVisible1(true)}
             style={{
-              width: '15%',
+              width: "15%",
               height: 45,
 
-              backgroundColor: 'white',
-              shadowColor: '#000',
+              backgroundColor: "white",
+              shadowColor: "#000",
               shadowOffset: {
                 width: 0,
                 height: 2,
@@ -392,152 +466,163 @@ const Trackparcel = () => {
               elevation: 2,
               marginLeft: 2,
               borderRadius: 7,
-              justifyContent: 'center',
-            }}>
+              justifyContent: "center",
+            }}
+          >
             <Ionicons
-              name={'call'}
+              name={"call"}
               size={20}
-              color={'red'}
-              style={{alignSelf: 'center'}}
+              color={"red"}
+              style={{ alignSelf: "center" }}
             />
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          style={{position: 'absolute', left: 50}}
-          onPress={() => navigation.navigate('RideDetail')}>
+          style={{ position: "absolute", left: 50 }}
+          onPress={() => navigation.navigate("RideDetail")}
+        >
           <Image source={menu} />
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <Modal animationType="slide" transparent={true} visible={modalVisible2}>
-        <View style={{flex: 1, backgroundColor: 'rgba(52, 52, 52, 0.8)'}}>
+        <View style={{ flex: 1, backgroundColor: "rgba(52, 52, 52, 0.8)" }}>
           <View
             style={{
-              backgroundColor: '#FBFBFB',
+              backgroundColor: "#FBFBFB",
               borderRadius: 20,
               flex: 1,
               marginVertical: 80,
               paddingVertical: 10,
               marginHorizontal: 10,
-            }}>
-            <View style={{alignItems: 'flex-end', paddingRight: 10}}>
+            }}
+          >
+            <View style={{ alignItems: "flex-end", paddingRight: 10 }}>
               <AntDesign
                 name="close"
                 size={24}
-                color={'black'}
+                color={"black"}
                 style={{}}
                 onPress={() => setModalVisible2(false)}
               />
             </View>
-            <View style={{alignItems: 'center'}}>
+            <View style={{ alignItems: "center" }}>
               <Text
                 style={{
                   fontSize: 16,
-                  color: 'black',
-                }}>
+                  color: "black",
+                }}
+              >
                 Write your feedback
               </Text>
             </View>
-            <View style={{paddingVertical: 10}}>
+            <View style={{ paddingVertical: 10 }}>
               <TextInput style={styles.input} placeholder="Good and honest!" />
             </View>
-            <View style={{paddingTop: 25, paddingLeft: 75}}>
-              <Text style={{color: 'black', fontWeight: 'bold'}}>
+            <View style={{ paddingTop: 25, paddingLeft: 75 }}>
+              <Text style={{ color: "black", fontWeight: "bold" }}>
                 Parcel Condition
               </Text>
             </View>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
+                flexDirection: "row",
+                justifyContent: "space-evenly",
                 paddingHorizontal: 50,
                 paddingTop: 5,
-              }}>
-              <Entypo name="star-outlined" color={'black'} size={30} />
-              <Entypo name="star-outlined" color={'black'} size={30} />
-              <Entypo name="star-outlined" color={'black'} size={30} />
-              <Entypo name="star-outlined" color={'black'} size={30} />
-              <Entypo name="star-outlined" color={'black'} size={30} />
+              }}
+            >
+              <Entypo name="star-outlined" color={"black"} size={30} />
+              <Entypo name="star-outlined" color={"black"} size={30} />
+              <Entypo name="star-outlined" color={"black"} size={30} />
+              <Entypo name="star-outlined" color={"black"} size={30} />
+              <Entypo name="star-outlined" color={"black"} size={30} />
             </View>
-            <View style={{paddingTop: 25, paddingLeft: 75}}>
-              <Text style={{color: 'black', fontWeight: 'bold'}}>
+            <View style={{ paddingTop: 25, paddingLeft: 75 }}>
+              <Text style={{ color: "black", fontWeight: "bold" }}>
                 Driver Timelines
               </Text>
             </View>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
+                flexDirection: "row",
+                justifyContent: "space-evenly",
                 paddingHorizontal: 50,
                 paddingTop: 5,
-              }}>
-              <Entypo name="star-outlined" color={'black'} size={30} />
-              <Entypo name="star-outlined" color={'black'} size={30} />
-              <Entypo name="star-outlined" color={'black'} size={30} />
-              <Entypo name="star-outlined" color={'black'} size={30} />
-              <Entypo name="star-outlined" color={'black'} size={30} />
+              }}
+            >
+              <Entypo name="star-outlined" color={"black"} size={30} />
+              <Entypo name="star-outlined" color={"black"} size={30} />
+              <Entypo name="star-outlined" color={"black"} size={30} />
+              <Entypo name="star-outlined" color={"black"} size={30} />
+              <Entypo name="star-outlined" color={"black"} size={30} />
             </View>
-            <View style={{alignItems: 'center', marginVertical: 30}}>
-              <Text style={{color: 'black'}}>Add a tip</Text>
+            <View style={{ alignItems: "center", marginVertical: 30 }}>
+              <Text style={{ color: "black" }}>Add a tip</Text>
             </View>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
+                flexDirection: "row",
+                justifyContent: "space-evenly",
                 paddingHorizontal: 50,
-              }}>
+              }}
+            >
               <TouchableOpacity
                 style={{
-                  width: '18%',
-                  backgroundColor: 'white',
+                  width: "18%",
+                  backgroundColor: "white",
                   height: 45,
                   borderRadius: 25,
-                  borderColor: 'black',
+                  borderColor: "black",
                   borderWidth: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'black'}}>$ 5</Text>
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ color: "black" }}>$ 5</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
-                  width: '18%',
-                  backgroundColor: '#EEEEEE',
+                  width: "18%",
+                  backgroundColor: "#EEEEEE",
                   height: 45,
                   borderRadius: 25,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'black'}}>$ 10</Text>
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ color: "black" }}>$ 10</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
-                  width: '18%',
-                  backgroundColor: 'white',
+                  width: "18%",
+                  backgroundColor: "white",
                   height: 45,
                   borderRadius: 25,
-                  borderColor: 'black',
+                  borderColor: "black",
                   borderWidth: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'black'}}>$ 20</Text>
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ color: "black" }}>$ 20</Text>
               </TouchableOpacity>
             </View>
-            <View style={{alignItems: 'center'}}>
+            <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={{
                   borderColor: colors.secondary,
-                  width: '45%',
+                  width: "45%",
                   borderWidth: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  justifyContent: "center",
+                  alignItems: "center",
                   borderRadius: 20,
                   padding: 8,
                   marginBottom: 50,
                   marginTop: 30,
-                }}>
-                <Text style={{color: colors.secondary, fontWeight: 'bold'}}>
+                }}
+              >
+                <Text style={{ color: colors.secondary, fontWeight: "bold" }}>
                   Submit
                 </Text>
               </TouchableOpacity>
@@ -548,38 +633,44 @@ const Trackparcel = () => {
 
       {/* /////Ist Modal///// */}
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <View
             style={{
-              backgroundColor: 'rgba(52, 52, 52, 0.8)',
+              backgroundColor: "rgba(52, 52, 52, 0.8)",
               flex: 1,
-              justifyContent: 'flex-end',
+              justifyContent: "flex-end",
               paddingBottom: 20,
-            }}>
+            }}
+          >
             <View
               style={{
-                flexDirection: 'row',
+                flexDirection: "row",
                 paddingHorizontal: 10,
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-              <Text style={{fontSize: 28, fontWeight: 'bold', color: 'white'}}>
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{ fontSize: 28, fontWeight: "bold", color: "white" }}
+              >
                 Live Chat
               </Text>
             </View>
           </View>
           <View
             style={{
-              backgroundColor: 'white',
+              backgroundColor: "white",
               flex: 1,
-            }}>
+            }}
+          >
             <TouchableOpacity
               onPress={() => setModalVisible(false)}
-              style={{paddingHorizontal: 20, marginTop: 10}}>
+              style={{ paddingHorizontal: 20, marginTop: 10 }}
+            >
               <Image
                 source={cross1}
                 style={{
-                  alignSelf: 'flex-end',
+                  alignSelf: "flex-end",
                 }}
               />
             </TouchableOpacity>
@@ -591,12 +682,13 @@ const Trackparcel = () => {
               </View>
               <View
                 style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderBottomColor: 'gray',
+                  flexDirection: "row",
+                  alignItems: "center",
+                  borderBottomColor: "gray",
                   borderBottomWidth: 0.5,
                   paddingBottom: 15,
-                }}>
+                }}
+              >
                 <Image source={messagedp} />
                 <Text style={styles.textReceived}>
                   i'ill be out in a minute.
@@ -605,13 +697,13 @@ const Trackparcel = () => {
             </ScrollView>
             <View
               style={{
-                position: 'absolute',
-                backgroundColor: 'white',
+                position: "absolute",
+                backgroundColor: "white",
                 bottom: 0,
-                width: '100%',
+                width: "100%",
                 borderTopLeftRadius: 15,
                 borderTopRightRadius: 15,
-                shadowColor: '#000',
+                shadowColor: "#000",
                 shadowOffset: {
                   width: 1,
                   height: 1,
@@ -619,9 +711,10 @@ const Trackparcel = () => {
                 shadowOpacity: 0.25,
                 shadowRadius: 4,
                 elevation: 8,
-              }}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <View style={{width: '70%'}}>
+              }}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View style={{ width: "70%" }}>
                   <TextInput
                     style={styles.input}
                     placeholder="Type your message"
@@ -629,13 +722,14 @@ const Trackparcel = () => {
                 </View>
                 <View
                   style={{
-                    width: '30%',
-                    flexDirection: 'row',
+                    width: "30%",
+                    flexDirection: "row",
                     paddingLeft: 20,
-                  }}>
-                  <View style={{borderLeftWidth: 1, paddingLeft: 20}}></View>
+                  }}
+                >
+                  <View style={{ borderLeftWidth: 1, paddingLeft: 20 }}></View>
                   <View>
-                    <Text style={{color: '#5491F5'}}>Send</Text>
+                    <Text style={{ color: "#5491F5" }}>Send</Text>
                   </View>
                 </View>
               </View>
@@ -645,38 +739,42 @@ const Trackparcel = () => {
       </Modal>
       {/* /////2nd Modal///// */}
       <Modal animationType="slide" transparent={true} visible={modalVisible1}>
-        <View style={{flex: 1, backgroundColor: 'rgba(52, 52, 52, 0.8)'}}>
+        <View style={{ flex: 1, backgroundColor: "rgba(52, 52, 52, 0.8)" }}>
           <View
             style={{
               flex: 1,
-              backgroundColor: 'white',
+              backgroundColor: "white",
               marginVertical: 120,
-              shadowColor: '#000',
-              shadowOffset: {width: 1, height: 1},
+              shadowColor: "#000",
+              shadowOffset: { width: 1, height: 1 },
               shadowOpacity: 0.4,
               shadowRadius: 3,
               elevation: 6,
               paddingVertical: 20,
               borderRadius: 20,
-            }}>
+            }}
+          >
             <View
               style={{
-                alignItems: 'center',
-                borderBottomColor: 'gray',
+                alignItems: "center",
+                borderBottomColor: "gray",
                 borderBottomWidth: 1,
                 paddingBottom: 20,
-              }}>
+              }}
+            >
               <Text
                 style={{
                   fontSize: 20,
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                   color: colors.secondary,
-                }}>
+                }}
+              >
                 Delivery Successful
               </Text>
               <TouchableOpacity
                 onPress={() => setModalVisible1(false)}
-                style={{position: 'absolute', right: 15, top: 7}}>
+                style={{ position: "absolute", right: 15, top: 7 }}
+              >
                 <Image source={cross1} />
               </TouchableOpacity>
             </View>
@@ -684,19 +782,21 @@ const Trackparcel = () => {
             <View
               style={{
                 paddingTop: 20,
-              }}>
+              }}
+            >
               <View
                 style={{
-                  flexDirection: 'row',
+                  flexDirection: "row",
                   paddingHorizontal: 20,
-                  alignItems: 'center',
-                }}>
+                  alignItems: "center",
+                }}
+              >
                 <MaterialCommunityIcons
                   name="checkbox-blank-circle"
-                  color={'#d9d9d9'}
+                  color={"#d9d9d9"}
                   size={18}
                 />
-                <Text style={{color: 'black', paddingLeft: 20}}>
+                <Text style={{ color: "black", paddingLeft: 20 }}>
                   Naud Street 1, Sector 9A, La
                 </Text>
               </View>
@@ -706,44 +806,49 @@ const Trackparcel = () => {
                   borderLeftColor: colors.primary,
                   height: 30,
                   marginLeft: 27,
-                }}></View>
+                }}
+              ></View>
               <View
                 style={{
-                  flexDirection: 'row',
+                  flexDirection: "row",
                   paddingHorizontal: 20,
-                  alignItems: 'center',
-                }}>
+                  alignItems: "center",
+                }}
+              >
                 <MaterialCommunityIcons
                   name="square"
                   color={colors.secondary}
                   size={18}
-                  style={{paddingTop: 5}}
+                  style={{ paddingTop: 5 }}
                 />
-                <Text style={{color: 'black', paddingLeft: 20}}>
+                <Text style={{ color: "black", paddingLeft: 20 }}>
                   Bestia Resturant La, Street 121,
                 </Text>
               </View>
             </View>
             <View
               style={{
-                borderBottomColor: '#B5B5B5',
+                borderBottomColor: "#B5B5B5",
                 borderBottomWidth: 2,
                 marginHorizontal: 140,
                 marginTop: 40,
-              }}></View>
+              }}
+            ></View>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
+                flexDirection: "row",
+                justifyContent: "space-evenly",
                 paddingVertical: 20,
-              }}>
+              }}
+            >
               <View>
                 <Text
                   style={{
-                    fontWeight: 'bold',
-                    color: 'black',
-                    textAlign: 'center',
-                  }}>
+                    fontWeight: "bold",
+                    color: "black",
+                    textAlign: "center",
+                  }}
+                >
                   12 km
                 </Text>
                 <Text>Delivery distance</Text>
@@ -751,37 +856,40 @@ const Trackparcel = () => {
               <View>
                 <Text
                   style={{
-                    fontWeight: 'bold',
-                    color: 'black',
-                    textAlign: 'center',
-                  }}>
+                    fontWeight: "bold",
+                    color: "black",
+                    textAlign: "center",
+                  }}
+                >
                   10 mins
                 </Text>
                 <Text>Delivery time</Text>
               </View>
             </View>
 
-            <View style={{alignItems: 'center', paddingTop: 20}}>
+            <View style={{ alignItems: "center", paddingTop: 20 }}>
               <Text
                 style={{
                   color: colors.secondary,
                   fontSize: 24,
-                  fontWeight: 'bold',
-                }}>
+                  fontWeight: "bold",
+                }}
+              >
                 $ 250.00
               </Text>
               <Text style={{}}>Payment has been deducted</Text>
               <TouchableOpacity
                 style={{
                   backgroundColor: colors.secondary,
-                  width: '40%',
+                  width: "40%",
                   padding: 5,
                   borderRadius: 20,
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  justifyContent: "center",
+                  alignItems: "center",
                   marginTop: 30,
-                }}>
-                <Text style={{color: 'white'}}>Rate your ride</Text>
+                }}
+              >
+                <Text style={{ color: "white" }}>Rate your ride</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -798,33 +906,33 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   map: {
-    width: '100%',
-    height: '80%',
+    width: "100%",
+    height: "80%",
   },
   input: {
     height: 40,
     borderBottomWidth: 0.5,
-    borderBottomColor: 'gray',
+    borderBottomColor: "gray",
     paddingLeft: 25,
   },
   container1: {
     flex: 1,
-    backgroundColor: '#FCFCFC',
+    backgroundColor: "#FCFCFC",
   },
   textReceived: {
-    color: '#000000',
+    color: "#000000",
     paddingLeft: 10,
   },
   textSendView: {
-    backgroundColor: '#C2D0E9',
+    backgroundColor: "#C2D0E9",
     marginHorizontal: 10,
     marginLeft: 60,
     paddingHorizontal: 20,
-    width: '80%',
+    width: "80%",
     paddingVertical: 10,
     borderBottomLeftRadius: 15,
     borderTopLeftRadius: 15,
