@@ -44,3 +44,6 @@ export const cross1 = require("./images/cross1.png");
 export const checkmark = require("./images/checkmark.png");
 export const startmarker = require("./images/startmarker.png");
 export const endmarker = require("./images/endmarker.png");
+export const delivery = require("./images/delivery.png");
+export const tick = require("./images/tick.png");
+export const watch = require("./images/watch.png");

@@ -79,10 +79,15 @@ const CardDetail = () => {
                   marginVertical: 5,
                   color: 'black',
                   fontSize: 16,
+                  fontWeight: 'bold',
                 }}>
                 Expiry
               </Text>
-              <TextInput placeholder="MM/YYY" style={styles.input} />
+              <TextInput
+                placeholder="MM/YYY"
+                style={styles.input}
+                placeholderTextColor={'black'}
+              />
             </View>
             <View style={{width: '47%'}}>
               <Text
@@ -91,10 +96,15 @@ const CardDetail = () => {
                   marginVertical: 5,
                   color: 'black',
                   fontSize: 16,
+                  fontWeight: 'bold',
                 }}>
                 CVV
               </Text>
-              <TextInput placeholder="(3 Digits)" style={styles.input} />
+              <TextInput
+                placeholder="(3 Digits)"
+                style={styles.input}
+                placeholderTextColor={'black'}
+              />
             </View>
           </View>
           <View
@@ -113,8 +123,10 @@ const CardDetail = () => {
             <TouchableOpacity style={{}}>
               <Text
                 style={{
-                  fontSize: 13,
-                  marginLeft: 3,
+                  fontSize: 14,
+                  marginLeft: 7,
+                  color:"#595959",
+                  fontWeight:'bold'
                 }}>
                 Save this card for a faster checkout next time
               </Text>
@@ -130,7 +142,7 @@ const CardDetail = () => {
               padding: 12,
               borderRadius: 25,
               marginTop: 30,
-              marginBottom: 100,
+              marginBottom: 200,
             }}>
             <Text
               style={{
@@ -156,7 +168,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'red',
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius: 25,
     marginVertical: 20,
     paddingLeft: 10,
   },

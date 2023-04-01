@@ -105,26 +105,31 @@ const ResetPassword = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Login')}
+        <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: 130,
-            alignItems: 'center',
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
             marginBottom: 10,
-          }}>
-          <Text style={{color: 'black'}}>Already have an account?</Text>
-          <Text
-            style={{
-              color: '#df0300',
-              fontWeight: 'bold',
-              fontSize: 16,
-              paddingLeft: 5,
-            }}>
-            Sign In
-          </Text>
-        </TouchableOpacity>
+            marginTop: Platform.OS == "ios" ? 150 : 20,
+          }}
+        >
+          <View>
+            <Text style={{ color: "black" }}>Already have an account?</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Text
+              style={{
+                color: "#df0300",
+                fontWeight: "bold",
+                fontSize: 16,
+                paddingLeft: 5,
+              }}
+            >
+              Sign In
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );

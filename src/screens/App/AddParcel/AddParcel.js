@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  Platform,
 } from 'react-native';
 import React, {useState, useRef} from 'react';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
@@ -241,7 +242,7 @@ const AddParcel = () => {
             style={{
               borderWidth: 1,
               borderColor: '#C70118',
-              marginTop: 70,
+              marginTop:Platform.OS=="ios"?100: 70,
               justifyContent: 'center',
               alignItems: 'center',
               marginHorizontal: 50,
@@ -380,7 +381,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius:Platform.OS=="ios"?25: 20,
     marginVertical: 20,
     paddingLeft: 10,
   },

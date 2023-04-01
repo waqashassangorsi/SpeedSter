@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   TextInput,
+  Platform,
 } from 'react-native';
 import React from 'react';
 import {Header, Badge} from 'react-native-elements';
@@ -39,7 +40,7 @@ const Chatting = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -50,7 +51,7 @@ const Chatting = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
       <View
         style={{
           alignItems: 'center',
@@ -58,13 +59,15 @@ const Chatting = () => {
           flexDirection: 'row',
           justifyContent: 'space-around',
           paddingHorizontal: 5,
+          marginVertical:Platform.OS=="ios"?20: 10,
+
         }}>
         <View style={{width: '10%'}}>
           <AntDesign name={'arrowleft'} size={30} color={'black'} />
         </View>
         <View style={{width: '80%', alignItems: 'center'}}>
           <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
-            Trip
+            Live Chat
           </Text>
         </View>
         <View style={{width: '10%'}}>
@@ -84,6 +87,7 @@ const Chatting = () => {
             borderBottomColor: 'gray',
             borderBottomWidth: 0.5,
             paddingBottom: 15,
+            paddingHorizontal:10
           }}>
           <Image source={messagedp} />
           <Text style={styles.textReceived}>i'ill be out in a minute.</Text>
@@ -93,7 +97,7 @@ const Chatting = () => {
         style={{
           position: 'absolute',
           backgroundColor: 'white',
-          bottom: 0,
+          bottom:0,
           width: '100%',
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
@@ -105,6 +109,7 @@ const Chatting = () => {
           shadowOpacity: 0.25,
           shadowRadius: 4,
           elevation: 8,
+          paddingVertical:Platform.OS=="ios"?20:0
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={{width: '70%'}}>
@@ -151,4 +156,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   textSend: {},
+  input:{
+    paddingLeft:10
+  }
 });

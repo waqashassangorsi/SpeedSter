@@ -92,7 +92,7 @@ const Trackparcel = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -103,7 +103,7 @@ const Trackparcel = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
       <View
         style={{
           alignItems: "center",
@@ -306,7 +306,7 @@ const Trackparcel = () => {
           </TouchableOpacity>
         </ScrollView>
       </RBSheet>
-      {/* <View
+      <View
         style={{
           position: "absolute",
           backgroundColor: "white",
@@ -422,7 +422,7 @@ const Trackparcel = () => {
             >
               John Adams
             </Text>
-            <Text style={{ color: "white" }}>Delivery boy</Text>
+            <Text style={{ color: "white" }}>Driver</Text>
           </View>
           <TouchableOpacity
             onPress={() => setModalVisible(true)}
@@ -483,7 +483,7 @@ const Trackparcel = () => {
         >
           <Image source={menu} />
         </TouchableOpacity>
-      </View> */}
+      </View>
 
       <Modal animationType="slide" transparent={true} visible={modalVisible2}>
         <View style={{ flex: 1, backgroundColor: "rgba(52, 52, 52, 0.8)" }}>

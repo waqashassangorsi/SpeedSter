@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
@@ -35,7 +36,7 @@ const Login = ({ signin }) => {
       const formData = new FormData();
       formData.append("mobile_no", number);
       formData.append("password", pass);
-      formData.append("status", "0");
+      formData.append("status", "3");
       console.log("LoginData", formData);
       try {
         const res = await signin(formData);
@@ -84,12 +85,7 @@ const Login = ({ signin }) => {
             value={number}
           />
 
-          <Octicons
-            style={styles.person}
-            name="person"
-            size={20}
-            color="#000"
-          />
+          <Octicons style={styles.person} name="person" size={20} />
         </View>
         <View style={{ overflow: "hidden", paddingBottom: 5 }}>
           <TextInput
@@ -100,7 +96,6 @@ const Login = ({ signin }) => {
             placeholderTextColor={"black"}
             onChangeText={(e) => setpass(e)}
             value={pass}
-            secureTextEntry={true}
           />
           <MaterialIcons
             style={styles.lock1}
@@ -175,28 +170,31 @@ const Login = ({ signin }) => {
             <Image source={google} />
           </View>
         </View> */}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("SignupCopy")}
+        <View
           style={{
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
             marginBottom: 10,
-            marginTop: 20,
+            marginTop: Platform.OS == "ios" ? 120 : 20,
           }}
         >
-          <Text style={{ color: "black" }}>Don't have an account?</Text>
-          <Text
-            style={{
-              color: "#df0300",
-              fontWeight: "bold",
-              fontSize: 16,
-              paddingLeft: 5,
-            }}
-          >
-            Sign Up
-          </Text>
-        </TouchableOpacity>
+          <View>
+            <Text style={{ color: "black" }}>Don't have an account?</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("SignupCopy")}>
+            <Text
+              style={{
+                color: "#df0300",
+                fontWeight: "bold",
+                fontSize: 16,
+                paddingLeft: 5,
+              }}
+            >
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );

@@ -5,6 +5,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
@@ -82,7 +83,7 @@ const ParcelDetail = () => {
         </MapView>
         <View
           style={{
-            width: '12%',
+            width:Platform.OS=="ios"?"11%": '12%',
             backgroundColor: 'white',
             shadowColor: '#000',
             shadowOffset: {
@@ -96,7 +97,7 @@ const ParcelDetail = () => {
             height: 45,
             borderRadius: 25,
             position: 'absolute',
-            top: 5,
+            top:Platform.OS=="ios"?25: 5,
             left: 15,
           }}>
           <Feather
@@ -260,5 +261,6 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '40%',
+    marginTop:Platform.OS=="ios"?20:0
   },
 });

@@ -45,7 +45,7 @@ const DrawerContent = ({props, navigation}) => {
               />
             }
             rightComponent={
-              <Entypo name={'cross'} size={30} color={'black'} style={{}} />
+              <Entypo name={'cross'} size={30} color={'black'} style={{marginTop:-15}} />
             }
           />
 
@@ -90,6 +90,14 @@ const DrawerContent = ({props, navigation}) => {
               elevation: 4,
               backgroundColor: 'white',
               paddingVertical: 25,
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              elevation: 4,
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
             }}>
             <Octicons name="person" color={'black'} size={20} />
             <Text style={{color: 'black', fontSize: 16, paddingRight: 20}}>
@@ -103,6 +111,14 @@ const DrawerContent = ({props, navigation}) => {
               elevation: 4,
               backgroundColor: 'white',
               paddingVertical: 10,
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              elevation: 4,
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
             }}>
             <View
               style={{
@@ -258,7 +274,7 @@ const DrawerContent = ({props, navigation}) => {
               backgroundColor: colors.secondary,
               marginVertical: 15,
               marginHorizontal: 20,
-              padding: 6,
+              padding: 9,
               borderRadius: 20,
               marginTop: 50,
             }}>

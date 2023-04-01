@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  Platform,
 } from 'react-native';
 import React from 'react';
 import {Header, Badge} from 'react-native-elements';
@@ -100,7 +101,7 @@ const Activities = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -111,7 +112,7 @@ const Activities = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
       <ScrollView>
         <View
           style={{
@@ -191,7 +192,7 @@ const Activities = () => {
           style={{
             alignItems: 'flex-end',
             flex: 1,
-            marginTop: 90,
+            marginTop:Platform.OS=="ios"?150: 90,
             paddingBottom: 80,
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: colors.secondary,
     borderWidth: 1.5,
-    marginTop: -25,
+    marginTop:Platform.OS=="ios"?-5: -25,
     borderTopWidth: 2,
     borderTopColor: colors.secondary,
     height: 150,

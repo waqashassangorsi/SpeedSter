@@ -96,7 +96,7 @@ const SearchDriver = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -107,7 +107,7 @@ const SearchDriver = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
       <View
         style={{
           alignItems: 'center',
@@ -202,10 +202,11 @@ const SearchDriver = () => {
             marginTop: 50,
             justifyContent: 'center',
             alignItems: 'center',
-            marginHorizontal: 60,
             padding: 8,
             marginBottom: 350,
             borderRadius: 20,
+            width:"50%",
+            marginLeft:100
           }}>
           <Text style={{fontSize: 18, color: 'black'}}>Cancel Request</Text>
         </TouchableOpacity>

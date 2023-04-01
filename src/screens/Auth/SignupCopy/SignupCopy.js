@@ -189,8 +189,8 @@ const SignupCopy = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => handleSignup()}
-            // onPress={() => navigation.navigate("Home")}
+             onPress={() => handleSignup()}
+            // onPress={() => navigation.navigate("Phoneverify")}
             style={{
               justifyContent: "center",
               alignItems: "center",
@@ -211,28 +211,31 @@ const SignupCopy = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Login")}
+        <View
           style={{
             flexDirection: "row",
             justifyContent: "center",
-            marginTop: 70,
             alignItems: "center",
             marginBottom: 10,
+            marginTop: Platform.OS == "ios" ? 110 : 20,
           }}
         >
-          <Text style={{ color: "black" }}>Already have an account?</Text>
-          <Text
-            style={{
-              color: "#df0300",
-              fontWeight: "bold",
-              fontSize: 16,
-              paddingLeft: 5,
-            }}
-          >
-            Sign In
-          </Text>
-        </TouchableOpacity>
+          <View>
+            <Text style={{ color: "black" }}>Already have an account?</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Text
+              style={{
+                color: "#df0300",
+                fontWeight: "bold",
+                fontSize: 16,
+                paddingLeft: 5,
+              }}
+            >
+              Sign In
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );

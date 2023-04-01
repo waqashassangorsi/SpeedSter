@@ -4,64 +4,105 @@ import {
   View,
   ScrollView,
   Image,
-  TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useRef } from "react";
-
+import React, { useState, useRef, useEffect } from "react";
 import PhoneInput from "react-native-phone-number-input";
 import { logo, logo1, logo2 } from "../../../assets";
+import { CommonActions } from "@react-navigation/routers";
+
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import colors from "../../../theme/colors";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 import { useNavigation } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
-
-const Phoneverify = ({ route }) => {
-  const [countryCode, setCountryCode] = useState("FR");
-  const [country, setCountry] = useState(null);
-  const [withCountryNameButton, setWithCountryNameButton] = useState(false);
-  const [withFlag, setWithFlag] = useState(true);
-  const [withEmoji, setWithEmoji] = useState(true);
-  const [withFilter, setWithFilter] = useState(true);
-  const [withAlphaFilter, setWithAlphaFilter] = useState(false);
-  const [withCallingCode, setWithCallingCode] = useState(false);
+import { firebase } from "@react-native-firebase/auth";
+import { connect } from "react-redux";
+import { Loading } from "../../../components/Loading";
+import { signup } from "../../../redux/actions/auth";
+const Phoneverify = ({ route, signup }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setotp] = useState("");
   const [showview, setshowview] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [confirm, setConfirm] = useState(null);
   const navigation = useNavigation();
   const phoneInput = useRef(null);
   console.log("first", phoneNumber);
-  const callapi = () => {
-    navigation.navigate("Home");
-  };
+  const { Password, Email, Name, Cnf } = route.params;
+  console.log("checkphonenum", Password, Email, Name, Cnf);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log("first", user._user.phoneNumber);
+        if (user._user.phoneNumber == phoneNumber) {
+          submitform();
+        }
+      }
+    });
+  }, []);
+
   const subbmitotp = async () => {
+    setLoading(true);
     let promise = new Promise((rsl, rej) => {
       confirm
         .confirm(otp)
         .then((confirmResult) => {
-          callapi();
+          submitform();
           rsl(confirmResult);
+          setLoading(false);
         })
         .catch((error) => {
           rej(error.message);
+          setLoading(false);
         });
     });
     promise.catch((err) => {
       alert(err);
+      setLoading(false);
     });
   };
   const showView = async () => {
+    setLoading(true);
     const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
     setConfirm(confirmation);
     if (confirmation) {
       setshowview(1);
+      setLoading(false);
+    } else {
+      setLoading(false);
     }
   };
-
+  const submitform = async () => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("mobile_no", phoneNumber);
+    formData.append("password", Password);
+    formData.append("name", Name);
+    formData.append("email", Email);
+    formData.append("status", 3);
+    console.log("formData", formData);
+    const res = await signup(formData);
+    console.log("response", res);
+    if (res.data.status == true) {
+      setLoading(false);
+      setshowview(0);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "VehicleRegister" }],
+        })
+      );
+    } else {
+      setLoading(false);
+      alert(res.data.message);
+      setshowview(0);
+      navigation.navigate("SignupCopy");
+    }
+  };
   return (
     <ScrollView style={styles.container}>
+      <Loading visible={loading} />
       <View
         style={{
           flex: 1,
@@ -163,20 +204,24 @@ const Phoneverify = ({ route }) => {
             />
           </TouchableOpacity>
         </View>
-        <Text
-          style={{
-            textAlign: "right",
-            paddingHorizontal: 20,
-            color: "#aa2222",
-            fontWeight: "bold",
-            fontSize: 16,
-            marginTop: 10,
-          }}
-        >
-          Resend Code
-        </Text>
+
         {showview == 1 && (
           <View>
+            <TouchableOpacity onPress={() => showView()}>
+              <Text
+                style={{
+                  textAlign: "right",
+                  paddingHorizontal: 20,
+                  color: "#aa2222",
+                  fontWeight: "bold",
+                  fontSize: 16,
+                  marginTop: 10,
+                }}
+              >
+                Resend Code
+              </Text>
+            </TouchableOpacity>
+
             <Text
               style={{
                 paddingHorizontal: 10,
@@ -243,35 +288,43 @@ const Phoneverify = ({ route }) => {
             </View>
           </View>
         )}
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Login")}
+        <View
           style={{
             flexDirection: "row",
             justifyContent: "center",
-            marginTop: 120,
             alignItems: "center",
-            marginBottom: 20,
+            marginBottom: 10,
+            marginTop: Platform.OS == "ios" ? 130 : 20,
           }}
         >
-          <Text style={{ color: "black" }}>Already have an account?</Text>
-          <Text
-            style={{
-              color: "#df0300",
-              fontWeight: "bold",
-              fontSize: 16,
-              paddingLeft: 5,
-            }}
-          >
-            Sign In
-          </Text>
-        </TouchableOpacity>
+          <View>
+            <Text style={{ color: "black" }}>Already have an account?</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Text
+              style={{
+                color: "#df0300",
+                fontWeight: "bold",
+                fontSize: 16,
+                paddingLeft: 5,
+              }}
+            >
+              Sign In
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
 };
 
-export default Phoneverify;
-
+const mapStateToProps = (state) => {
+  const { user } = state.auth;
+  return { user };
+};
+export default connect(mapStateToProps, {
+  signup,
+})(Phoneverify);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
