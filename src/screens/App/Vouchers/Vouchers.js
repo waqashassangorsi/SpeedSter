@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View, Image, TouchableOpacity, Platform} from 'react-native';
+import React,{useState} from 'react';
 import BottomTab from '../../../components/BottomTab';
 import {Header, Badge} from 'react-native-elements';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -15,8 +15,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ScrollView} from 'react-native-gesture-handler';
+import Modal from 'react-native-modal';
 
 const Vouchers = () => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Header
@@ -41,7 +44,7 @@ const Vouchers = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -52,7 +55,7 @@ const Vouchers = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
       <View
         style={{
           alignItems: 'center',
@@ -133,9 +136,9 @@ const Vouchers = () => {
                 Valid until 1st Mar 2023
               </Text>
             </View>
-            <View style={{width: '20%', justifyContent: 'flex-end'}}>
+            <TouchableOpacity onPress={()=>setModalVisible(true)} style={{width: '20%', justifyContent: 'flex-end'}}>
               <Text style={{color: '#5491f5'}}>Use Now</Text>
-            </View>
+            </TouchableOpacity>
           </View>
           <View
             style={{
@@ -330,6 +333,82 @@ const Vouchers = () => {
           </View>
         </View>
       </ScrollView>
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          isVisible={isModalVisible}>
+          <View
+            style={{
+              backgroundColor: '#FBFBFB',
+              borderRadius: 7,
+              paddingVertical: 20,
+            }}>
+            <View style={{alignItems: 'center'}}>
+              <Image
+                source={cross}
+                style={{height: 80, width: 80}}
+                resizeMode="contain"
+              />
+              <View style={{marginVertical: 20}}>
+                <Text
+                  style={{fontWeight: 'bold', fontSize: 16, color: 'black'}}>
+                  20% Cash Back on{' '}
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 16,
+                      color: colors.secondary,
+                    }}>
+                    14th February
+                  </Text>
+                </Text>
+                <Text style={{textAlign: 'center'}}>
+                  Valid until 14 feb 2023
+                </Text>
+                <TouchableOpacity onPress={()=>setModalVisible(false)}
+                  style={{
+                    backgroundColor: colors.secondary,
+                    // width: '70%',
+                    alignItems: 'center',
+                    padding: 10,
+                    // marginLeft:Platform.OS=="ios"?45: 45,
+                    marginVertical: 20,
+                    borderRadius: 20,
+                    marginHorizontal:40
+                  }}>
+                  <Text
+                    style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+                    USE NOW
+                  </Text>
+                </TouchableOpacity>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    color: '#009F0B',
+                    fontSize: 14,
+                    // fontWeight: 'bold',
+                  }}>
+                  PROMO APPLIED
+                </Text>
+              </View>
+              {/* <View>
+           
+              </View> */}
+            </View>
+          </View>
+        </Modal>
+      </View>
+      <View
+        style={{
+          alignItems: 'flex-end',
+          flex: 1,
+          paddingHorizontal: 5,
+          justifyContent: 'flex-end',
+          paddingBottom: 80,
+        }}>
+        <Image source={whatsapp} style={{width: 90, height: 90}} />
+      </View>
       <BottomTab />
     </View>
   );

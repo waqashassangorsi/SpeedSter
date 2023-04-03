@@ -35,23 +35,23 @@ const Insuarance = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
-        value=" "
+        value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,
-          top: 40,
+          top:Platform.OS=="ios"?22: 42,
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
       <ScrollView>
         <View
           style={{
             alignItems: 'center',
-            marginVertical: 10,
+            marginVertical:Platform.OS=="ios"?20: 10,
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
             Insurances
@@ -139,7 +139,7 @@ const Insuarance = () => {
         <View
           style={{
             alignItems: 'flex-end',
-            marginTop: 150,
+            marginTop:Platform.OS=="ios"?200: 150,
             paddingBottom: 80,
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />

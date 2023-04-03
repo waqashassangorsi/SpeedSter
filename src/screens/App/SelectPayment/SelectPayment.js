@@ -249,6 +249,24 @@ const ParcelDetail = () => {
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />
         </View>
+        <View
+          style={{
+            position: 'absolute',
+            bottom:Platform.OS=="ios"?90: 100,
+            width: '40%',
+            left: 15,
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: colors.secondary,
+              padding: 7,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 20,
+            }}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Submit</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
       <BottomTab />
     </View>

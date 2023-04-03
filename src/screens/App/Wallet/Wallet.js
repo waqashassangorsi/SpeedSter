@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity, Platform} from 'react-native';
 import React from 'react';
 import {Header, Badge} from 'react-native-elements';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -36,7 +36,7 @@ const Wallet = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -47,12 +47,12 @@ const Wallet = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
 
       <View
         style={{
           alignItems: 'center',
-          marginVertical: 10,
+          marginVertical:Platform.OS=="ios"?20: 10,
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
           Wallet
@@ -77,29 +77,48 @@ const Wallet = () => {
             style={{
               position: 'absolute',
               top: 60,
-              left: 20,
+              left:Platform.OS=="ios"?40: 20,
             }}>
-            <Text style={{color: 'black'}}>Speedster Cash</Text>
+            <Text style={{color: 'black',paddingLeft:Platform.OS=="ios"?10:0}}>Speedster Cash</Text>
             <Text
               style={{
                 fontWeight: 'bold',
                 color: colors.secondary,
                 fontSize: 30,
+                paddingLeft:Platform.OS=="ios"?10:0
               }}>
               $ 0.00
             </Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'black',
-                width: '130%',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: 5,
-                borderRadius: 20,
-                marginTop: 20,
-              }}>
-              <Text style={{color: 'white'}}>Add</Text>
-            </TouchableOpacity>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: 'black',
+                  width: '60%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: 5,
+                  borderRadius: 20,
+                  marginTop: 20,
+                }}>
+                <Text style={{color: 'white'}}>Add</Text>
+              </TouchableOpacity>
+              {/* <TouchableOpacity
+                style={{
+                  width: '43%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: 5,
+                  borderRadius: 20,
+                  marginTop: 20,
+                  borderWidth: 1,
+                  borderColor: 'black',
+                }}>
+                <Text style={{color: 'black', fontWeight: 'bold'}}>
+                  Withdraw
+                </Text>
+              </TouchableOpacity> */}
+            </View>
           </View>
 
           <View

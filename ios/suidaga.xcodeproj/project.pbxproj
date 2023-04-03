@@ -12,7 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		4804C682E84B94CCC53530C5 /* libPods-suidaga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91F5CEB4C8B23BEEC7C7640B /* libPods-suidaga.a */; };
-		486E36B928C9DBB600B3D767 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486E36B828C9DBB600B3D767 /* GoogleService-Info.plist */; };
+		48F3E74829DAC2B0003F136E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48F3E74729DAC2AF003F136E /* GoogleService-Info.plist */; };
 		4F21DB4E47E5333C0C6FEB4C /* libPods-suidaga-suidagaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 400B43F36EBEED98327D9674 /* libPods-suidaga-suidagaTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B84EBB95265CB1A2003F4E29 /* MPLUSRounded1c-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B84EBB92265CB1A2003F4E29 /* MPLUSRounded1c-Regular.ttf */; };
@@ -44,8 +44,8 @@
 		400B43F36EBEED98327D9674 /* libPods-suidaga-suidagaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-suidaga-suidagaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		408BD33B10B611589EED48B4 /* Pods-suidaga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-suidaga.release.xcconfig"; path = "Target Support Files/Pods-suidaga/Pods-suidaga.release.xcconfig"; sourceTree = "<group>"; };
 		482349F92812AD8000FEB33E /* suidaga.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = suidaga.entitlements; path = suidaga/suidaga.entitlements; sourceTree = "<group>"; };
-		486E36B828C9DBB600B3D767 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		489C6EF328AE548600CD52BB /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		48F3E74729DAC2AF003F136E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = suidaga/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91F5CEB4C8B23BEEC7C7640B /* libPods-suidaga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-suidaga.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		947DED0324B5FEB8394E1F28 /* Pods-suidaga-suidagaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-suidaga-suidagaTests.debug.xcconfig"; path = "Target Support Files/Pods-suidaga-suidagaTests/Pods-suidaga-suidagaTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		13B07FAE1A68108700A75B9A /* suidaga */ = {
 			isa = PBXGroup;
 			children = (
-				486E36B828C9DBB600B3D767 /* GoogleService-Info.plist */,
+				48F3E74729DAC2AF003F136E /* GoogleService-Info.plist */,
 				482349F92812AD8000FEB33E /* suidaga.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -276,7 +276,7 @@
 				B84EBB97265CB1A2003F4E29 /* MPLUSRounded1c-Medium.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				486E36B928C9DBB600B3D767 /* GoogleService-Info.plist in Resources */,
+				48F3E74829DAC2B0003F136E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +533,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = X7U93YH9YK;
+				DEVELOPMENT_TEAM = Z22PGGLGUQ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = suidaga/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -548,7 +548,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.taximatclientdemo.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speedsteruser.com;
 				PRODUCT_NAME = suidaga;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -567,7 +567,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = X7U93YH9YK;
+				DEVELOPMENT_TEAM = Z22PGGLGUQ;
 				INFOPLIST_FILE = suidaga/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -581,9 +581,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.taximatclientdemo.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speedsteruser.com;
 				PRODUCT_NAME = suidaga;
-				PROVISIONING_PROFILE_SPECIFIER = ClientAppprov;
+				PROVISIONING_PROFILE_SPECIFIER = SpeedSterProvision;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

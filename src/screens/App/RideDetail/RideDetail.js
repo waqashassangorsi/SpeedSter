@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Platform} from 'react-native';
 import React from 'react';
 import {
   john,
@@ -46,7 +46,7 @@ const RideDetail = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -57,7 +57,7 @@ const RideDetail = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
       <ScrollView>
         <View
           style={{
@@ -217,7 +217,7 @@ const RideDetail = () => {
           style={{
             alignItems: 'flex-end',
             flex: 1,
-            paddingTop: 60,
+            paddingTop:Platform.OS=="ios"?110: 60,
             paddingBottom: 60,
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />

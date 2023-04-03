@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Platform} from 'react-native';
 import React from 'react';
 import {Header, Badge} from 'react-native-elements';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -80,7 +80,7 @@ const Rates = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -91,12 +91,12 @@ const Rates = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
       <ScrollView>
         <View
           style={{
             alignItems: 'center',
-            marginVertical: 10,
+            marginVertical:Platform.OS=="ios"?20: 10,
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
             Rates
@@ -127,7 +127,7 @@ const Rates = () => {
             alignItems: 'flex-end',
             flex: 1,
             // paddingHorizontal: 5,
-            marginTop: 120,
+            marginTop:Platform.OS=="ios"?150: 120,
             paddingBottom: 80,
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />

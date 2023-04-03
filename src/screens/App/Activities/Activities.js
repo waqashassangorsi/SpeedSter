@@ -117,7 +117,7 @@ const Activities = () => {
         <View
           style={{
             alignItems: 'center',
-            marginVertical: 10,
+            marginVertical:Platform.OS=="ios"?20: 10,
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
             Activities
@@ -192,7 +192,7 @@ const Activities = () => {
           style={{
             alignItems: 'flex-end',
             flex: 1,
-            marginTop:Platform.OS=="ios"?150: 90,
+            marginTop:Platform.OS=="ios"?135: 90,
             paddingBottom: 80,
           }}>
           <Image source={whatsapp} style={{width: 90, height: 90}} />

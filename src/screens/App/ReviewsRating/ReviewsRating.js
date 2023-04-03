@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Platform} from 'react-native';
 import React from 'react';
 import {Header, Badge} from 'react-native-elements';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -89,7 +89,7 @@ const ReviewsRating = () => {
       <View
         style={{
           alignItems: 'center',
-          marginVertical: 10,
+          marginVertical:Platform.OS=="ios"?20: 10,
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
           Reviews and Ratings

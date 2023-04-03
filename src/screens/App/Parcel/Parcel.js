@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Platform } from "react-native";
 import React from "react";
 import { Header, Badge } from "react-native-elements";
 import Octicons from "react-native-vector-icons/Octicons";
@@ -218,6 +218,7 @@ const Parcel = () => {
             flex: 1,
             justifyContent: "flex-end",
             paddingBottom: 80,
+            marginTop:Platform.OS=="ios"?40:0
           }}
         >
           <Image source={whatsapp} style={{ width: 90, height: 90 }} />

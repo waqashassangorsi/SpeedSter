@@ -51,30 +51,30 @@ import RBSheet from "react-native-raw-bottom-sheet";
 const Data = [1, 2, 3];
 const SLIDER_WIDTH = 400;
 const ITEM_WIDTH = 400;
-const requestLocationPermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        title: "Geolocation Permission",
-        message: "Can we access your location?",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
-        buttonPositive: "OK",
-      }
-    );
-    console.log("granted", granted);
-    if (granted === "granted") {
-      console.log("You can use Geolocation");
-      return true;
-    } else {
-      console.log("You cannot use Geolocation");
-      return false;
-    }
-  } catch (err) {
-    return false;
-  }
-};
+// const requestLocationPermission = async () => {
+//   try {
+//     const granted = await PermissionsAndroid.request(
+//       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+//       {
+//         title: "Geolocation Permission",
+//         message: "Can we access your location?",
+//         buttonNeutral: "Ask Me Later",
+//         buttonNegative: "Cancel",
+//         buttonPositive: "OK",
+//       }
+//     );
+//     console.log("granted", granted);
+//     if (granted === "granted") {
+//       console.log("You can use Geolocation");
+//       return true;
+//     } else {
+//       console.log("You cannot use Geolocation");
+//       return false;
+//     }
+//   } catch (err) {
+//     return false;
+//   }
+// };
 const Home = () => {
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
@@ -123,6 +123,7 @@ const Home = () => {
           paddingHorizontal: 45,
           borderTopLeftRadius: 10,
           borderBottomLeftRadius: 10,
+          width:'67%'
         }}
       >
         <Text style={{ color: "black", fontSize: 16, marginLeft: -20 }}>
@@ -152,64 +153,64 @@ const Home = () => {
       </View>
     </View>
   );
-  const getLocation = () => {
-    const result = requestLocationPermission();
-    result.then((res) => {
-      console.log("res is:", res);
-      if (res) {
-        Geolocation.getCurrentPosition(
-          (position) => {
-            console.log(position);
-            setLocation(position);
-          },
-          (error) => {
-            // See error code charts below.
-            console.log(error.code, error.message);
-            setLocation(false);
-          },
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-        );
-      }
-    });
-    console.log(location);
-  };
-  useEffect(() => {
-    if (Platform.OS === "android") {
-      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-        title: "Contacts",
-        message: "This app would like to view your contacts.",
-      }).then(() => {
-        loadContacts();
-      });
-    } else {
-      loadContacts();
-    }
-  }, []);
+  // const getLocation = () => {
+  //   const result = requestLocationPermission();
+  //   result.then((res) => {
+  //     console.log("res is:", res);
+  //     if (res) {
+  //       Geolocation.getCurrentPosition(
+  //         (position) => {
+  //           console.log(position);
+  //           setLocation(position);
+  //         },
+  //         (error) => {
+  //           // See error code charts below.
+  //           console.log(error.code, error.message);
+  //           setLocation(false);
+  //         },
+  //         { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+  //       );
+  //     }
+  //   });
+  //   console.log(location);
+  // };
+  // useEffect(() => {
+  //   if (Platform.OS === "android") {
+  //     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+  //       title: "Contacts",
+  //       message: "This app would like to view your contacts.",
+  //     }).then(() => {
+  //       loadContacts();
+  //     });
+  //   } else {
+  //     loadContacts();
+  //   }
+  // }, []);
 
-  const loadContacts = () => {
-    Contacts.getAll()
-      .then((contacts) => {
-        contacts.sort(
-          (a, b) => a.givenName.toLowerCase() > b.givenName.toLowerCase()
-        );
-        setContacts(contacts);
-      })
-      .catch((e) => {
-        alert("Permission to access contacts was denied");
-        console.warn("Permission to access contacts was denied");
-      });
-  };
+  // const loadContacts = () => {
+  //   Contacts.getAll()
+  //     .then((contacts) => {
+  //       contacts.sort(
+  //         (a, b) => a.givenName.toLowerCase() > b.givenName.toLowerCase()
+  //       );
+  //       setContacts(contacts);
+  //     })
+  //     .catch((e) => {
+  //       alert("Permission to access contacts was denied");
+  //       console.warn("Permission to access contacts was denied");
+  //     });
+  // };
 
-  const openContact = (contact) => {
-    console.log(JSON.stringify(contact));
-    Contacts.openExistingContact(contact);
-  };
-  const toggleModal = () => {
-    setModalVisible1(!isModalVisible1);
-  };
-  const closemodal = () => {
-    setModalVisible1(false);
-  };
+  // const openContact = (contact) => {
+  //   console.log(JSON.stringify(contact));
+  //   Contacts.openExistingContact(contact);
+  // };
+  // const toggleModal = () => {
+  //   setModalVisible1(!isModalVisible1);
+  // };
+  // const closemodal = () => {
+  //   setModalVisible1(false);
+  // };
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <Header
@@ -286,7 +287,7 @@ const Home = () => {
               Let speedster app access to your locatin
             </Text>
             <TouchableOpacity
-              onPress={getLocation}
+              // onPress={getLocation}
               style={{
                 backgroundColor: "#D9D9D9",
                 width: "60%",
@@ -656,7 +657,7 @@ const Home = () => {
             />
 
             <MaterialIcons
-              style={styles.lock}
+              style={styles.person}
               name="call"
               size={20}
               color="#A4A4A4"
@@ -666,7 +667,7 @@ const Home = () => {
               name="mode-edit"
               size={20}
               color={colors.secondary}
-              onPress={toggleModal}
+              // onPress={toggleModal}
             />
           </View>
           <TouchableOpacity
@@ -823,7 +824,9 @@ const styles = StyleSheet.create({
     paddingLeft: 50,
     marginTop: 10,
   },
-  person: { position: "absolute", left: 20, top: 43 },
-  eye: { position: "absolute", right: 20, top: 43 },
-  lock: { position: "absolute", top: 43, left: 20 },
+   person: { position: "absolute", left: 20, top: 43 },
+   eye1: { position: "absolute", right: 13, top: 17 },
+   lock: { position: "absolute", top: 43, left: 30 },
+   eye: { position: "absolute", right: 13, top: 40},
+
 });

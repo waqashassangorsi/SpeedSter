@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity, Platform} from 'react-native';
 import React from 'react';
 import {Header, Badge} from 'react-native-elements';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -34,7 +34,7 @@ const Promo = () => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -45,12 +45,12 @@ const Promo = () => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
 
       <View
         style={{
           alignItems: 'center',
-          marginVertical: 10,
+          marginVertical:Platform.OS=="ios"?20: 10,
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
           Promos
@@ -67,8 +67,7 @@ const Promo = () => {
           <View style={{flexDirection: 'row', marginTop: 40}}>
             <View
               style={{
-                width: '30%',
-                alignItems: 'flex-start',
+               
               }}>
               <Image
                 source={Person1}
@@ -77,35 +76,33 @@ const Promo = () => {
             </View>
             <View
               style={{
-                width: '27%',
-                alignItems: 'flex-end',
+                
+              }}>
+              <Image
+                source={Person1}
+                style={{width: 60, height: 60, borderRadius: 60 / 2,marginLeft:-15}}
+              />
+            </View>
+            <View
+              style={{
+               
               }}>
               <Image
                 source={Person1}
                 style={{width: 60, height: 60, borderRadius: 60 / 2}}
               />
             </View>
-          </View>
-          <View style={{position: 'absolute', right: 130, top: 40}}>
-            <Image
-              source={Person1}
+            <View
               style={{
-                width: 60,
-                height: 60,
-                borderRadius: 60 / 2,
-              }}
-            />
+               
+              }}>
+              <Image
+                source={Person1}
+                style={{width: 60, height: 60, borderRadius: 60 / 2,marginLeft:-15}}
+              />
+            </View>
           </View>
-          <View style={{position: 'absolute', left: 120, top: 40}}>
-            <Image
-              source={Person1}
-              style={{
-                width: 60,
-                height: 60,
-                borderRadius: 60 / 2,
-              }}
-            />
-          </View>
+          
           <View style={{marginVertical: 20}}>
             <Text>Share your promo code with your friends and</Text>
             <Text style={{textAlign: 'center'}}>

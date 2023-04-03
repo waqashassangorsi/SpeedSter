@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Header, Badge} from 'react-native-elements';
@@ -44,23 +45,23 @@ const Contact = () => {
           />
         }
       />
-      <Badge
+     {/* <Badge
         size={100}
         status="warning"
         value="1"
         containerStyle={{
           position: 'absolute',
           right: 27,
-          top: 40,
+          top:Platform.OS=="ios"?22: 42,
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
 
       <View
         style={{
           alignItems: 'center',
-          marginVertical: 10,
+          marginVertical:Platform.OS=="ios"?20: 10,
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
           Contact Us
@@ -108,9 +109,10 @@ const Contact = () => {
             <Text
               style={{
                 paddingLeft: 2,
-                marginVertical: 20,
                 color: 'black',
                 fontSize: 16,
+                marginTop: 30,
+                paddingBottom: 10,
               }}>
               Email
             </Text>
@@ -120,9 +122,9 @@ const Contact = () => {
             <Text
               style={{
                 paddingLeft: 2,
-                marginVertical: 20,
                 color: 'black',
                 fontSize: 16,
+                marginTop: 30,
               }}>
               Message
             </Text>
@@ -134,6 +136,7 @@ const Contact = () => {
                 borderColor: 'gray',
                 borderRadius: 10,
                 height: 110,
+                marginTop: 10,
               }}>
               <View
                 style={{
@@ -170,7 +173,12 @@ const Contact = () => {
           )}
           {dropview == 2 && (
             <View
-              style={{borderWidth: 1, borderColor: 'gray', borderRadius: 10}}>
+              style={{
+                borderWidth: 1,
+                borderColor: 'gray',
+                borderRadius: 10,
+                marginTop: 10,
+              }}>
               <View
                 style={{
                   flexDirection: 'row',
@@ -270,8 +278,9 @@ const styles = StyleSheet.create({
   input: {
     height: 45,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'gray',
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius: 25,
+    paddingLeft:10
   },
 });

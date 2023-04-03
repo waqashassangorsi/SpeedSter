@@ -45,7 +45,7 @@ import colors from "../../../theme/colors";
 const Trackparcel = () => {
   const refRBSheet = useRef();
   // const [isModalVisible, setModalVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  // const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
 
@@ -216,7 +216,7 @@ const Trackparcel = () => {
           },
         }}
       >
-        <View
+         <View
           style={{
             flexDirection: "row",
             alignItems: "center",
@@ -235,62 +235,72 @@ const Trackparcel = () => {
           style={{
             color: "black",
             textAlign: "center",
-            paddingVertical: 10,
+            paddingVertical: 20,
             fontWeight: "bold",
           }}
         >
           Why do you want to cancel?
         </Text>
         <ScrollView style={{ paddingHorizontal: 10 }}>
-          <Text
-            style={{
-              color: "black",
-              paddingVertical: 9,
-              borderBottomColor: "gray",
-              borderBottomWidth: 1,
-            }}
-          >
-            Requested by an accident?
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              paddingVertical: 9,
-              borderBottomColor: "gray",
-              borderBottomWidth: 1,
-            }}
-          >
-            Selected wrong location?
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              paddingVertical: 9,
-              borderBottomColor: "gray",
-              borderBottomWidth: 1,
-              fontWeight: "bold",
-            }}
-          >
-            Driver is to far away?
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              paddingVertical: 9,
-              borderBottomColor: "gray",
-              borderBottomWidth: 1,
-            }}
-          >
-            Driver isn't available?
-          </Text>
-          <Text
-            style={{
-              color: "black",
-              paddingVertical: 9,
-            }}
-          >
-            May be next time?
-          </Text>
+          <View style={{ borderBottomColor: "gray", borderBottomWidth: 1 }}>
+            <Text
+              style={{
+                color: "black",
+
+                paddingBottom: 15,
+              }}
+            >
+              Requested by an accident?
+            </Text>
+          </View>
+          <View style={{ borderBottomColor: "gray", borderBottomWidth: 1 }}>
+            <Text
+              style={{
+                color: "black",
+                borderBottomColor: "gray",
+                borderBottomWidth: 1,
+                paddingVertical: 15,
+              }}
+            >
+Selected wrong locatin?            </Text>
+          </View>
+          <View style={{ borderBottomColor: "gray", borderBottomWidth: 1 }}>
+            <Text
+              style={{
+                color: "black",
+                borderBottomColor: "gray",
+                borderBottomWidth: 1,
+                fontWeight: "bold",
+                paddingVertical: 15,
+              }}
+            >
+              Driver is too far away?
+            </Text>
+          </View>
+          <View style={{ borderBottomColor: "gray", borderBottomWidth: 1 }}>
+            <Text
+              style={{
+                color: "black",
+                borderBottomColor: "gray",
+                borderBottomWidth: 1,
+                paddingVertical: 10,
+              }}
+            >
+              Driver isn't available?
+            </Text>
+          </View>
+          <View style={{}}>
+            <Text
+              style={{
+                color: "black",
+
+                paddingVertical: 15,
+              }}
+            >
+              May be next time?
+            </Text>
+          </View>
+
           <TouchableOpacity
             style={{
               backgroundColor: "black",
@@ -406,7 +416,7 @@ const Trackparcel = () => {
               resizeMode="contain"
             />
           </View>
-          <View
+          <TouchableOpacity onPress={()=>navigation.navigate("DriverCompliments")}
             style={{
               width: "40%",
               // backgroundColor: 'pink',
@@ -423,9 +433,9 @@ const Trackparcel = () => {
               John Adams
             </Text>
             <Text style={{ color: "white" }}>Driver</Text>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => setModalVisible(true)}
+            // onPress={() => setModalVisible(true)}
             style={{
               width: "15%",
               backgroundColor: "white",
@@ -631,268 +641,169 @@ const Trackparcel = () => {
         </View>
       </Modal>
 
-      {/* /////Ist Modal///// */}
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View style={{ flex: 1 }}>
+      
+      {/* /////2nd Modal///// */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible1}
+        
+      >
+                <View style={{ flex: 1, backgroundColor: "rgba(52, 52, 52, 0.8)" }}>
+
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "white",
+            marginVertical: 120,
+            shadowColor: "#000",
+            shadowOffset: { width: 1, height: 1 },
+            shadowOpacity: 0.4,
+            shadowRadius: 3,
+            elevation: 6,
+            paddingVertical: 20,
+            borderRadius: 20,
+          }}
+        >
           <View
             style={{
-              backgroundColor: "rgba(52, 52, 52, 0.8)",
-              flex: 1,
-              justifyContent: "flex-end",
+              alignItems: "center",
+              borderBottomColor: "gray",
+              borderBottomWidth: 1,
               paddingBottom: 20,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                color: colors.secondary,
+              }}
+            >
+              Delivery Successful
+            </Text>
+            <TouchableOpacity
+              onPress={() => setModalVisible1(false)}
+              style={{ position: "absolute", right: 15, top: 7 }}
+            >
+              <Image source={cross1} />
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{
+              paddingTop: 20,
             }}
           >
             <View
               style={{
                 flexDirection: "row",
-                paddingHorizontal: 10,
+                paddingHorizontal: 20,
                 alignItems: "center",
-                justifyContent: "space-between",
               }}
             >
-              <Text
-                style={{ fontSize: 28, fontWeight: "bold", color: "white" }}
-              >
-                Live Chat
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              backgroundColor: "white",
-              flex: 1,
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => setModalVisible(false)}
-              style={{ paddingHorizontal: 20, marginTop: 10 }}
-            >
-              <Image
-                source={cross1}
-                style={{
-                  alignSelf: "flex-end",
-                }}
+              <MaterialCommunityIcons
+                name="checkbox-blank-circle"
+                color={"#d9d9d9"}
+                size={18}
               />
-            </TouchableOpacity>
-            <ScrollView style={styles.container1}>
-              <View style={styles.textSendView}>
-                <Text style={styles.textSend}>
-                  Hello i've arrived at your location.Please come quickly
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  borderBottomColor: "gray",
-                  borderBottomWidth: 0.5,
-                  paddingBottom: 15,
-                }}
-              >
-                <Image source={messagedp} />
-                <Text style={styles.textReceived}>
-                  i'ill be out in a minute.
-                </Text>
-              </View>
-            </ScrollView>
-            <View
-              style={{
-                position: "absolute",
-                backgroundColor: "white",
-                bottom: 0,
-                width: "100%",
-                borderTopLeftRadius: 15,
-                borderTopRightRadius: 15,
-                shadowColor: "#000",
-                shadowOffset: {
-                  width: 1,
-                  height: 1,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 4,
-                elevation: 8,
-              }}
-            >
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={{ width: "70%" }}>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Type your message"
-                  />
-                </View>
-                <View
-                  style={{
-                    width: "30%",
-                    flexDirection: "row",
-                    paddingLeft: 20,
-                  }}
-                >
-                  <View style={{ borderLeftWidth: 1, paddingLeft: 20 }}></View>
-                  <View>
-                    <Text style={{ color: "#5491F5" }}>Send</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      </Modal>
-      {/* /////2nd Modal///// */}
-      <Modal animationType="slide" transparent={true} visible={modalVisible1}>
-        <View style={{ flex: 1, backgroundColor: "rgba(52, 52, 52, 0.8)" }}>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: "white",
-              marginVertical: 120,
-              shadowColor: "#000",
-              shadowOffset: { width: 1, height: 1 },
-              shadowOpacity: 0.4,
-              shadowRadius: 3,
-              elevation: 6,
-              paddingVertical: 20,
-              borderRadius: 20,
-            }}
-          >
-            <View
-              style={{
-                alignItems: "center",
-                borderBottomColor: "gray",
-                borderBottomWidth: 1,
-                paddingBottom: 20,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  color: colors.secondary,
-                }}
-              >
-                Delivery Successful
+              <Text style={{ color: "black", paddingLeft: 20 }}>
+                Naud Street 1, Sector 9A, La
               </Text>
-              <TouchableOpacity
-                onPress={() => setModalVisible1(false)}
-                style={{ position: "absolute", right: 15, top: 7 }}
-              >
-                <Image source={cross1} />
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{
-                paddingTop: 20,
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  paddingHorizontal: 20,
-                  alignItems: "center",
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="checkbox-blank-circle"
-                  color={"#d9d9d9"}
-                  size={18}
-                />
-                <Text style={{ color: "black", paddingLeft: 20 }}>
-                  Naud Street 1, Sector 9A, La
-                </Text>
-              </View>
-              <View
-                style={{
-                  borderLeftWidth: 2,
-                  borderLeftColor: colors.primary,
-                  height: 30,
-                  marginLeft: 27,
-                }}
-              ></View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  paddingHorizontal: 20,
-                  alignItems: "center",
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="square"
-                  color={colors.secondary}
-                  size={18}
-                  style={{ paddingTop: 5 }}
-                />
-                <Text style={{ color: "black", paddingLeft: 20 }}>
-                  Bestia Resturant La, Street 121,
-                </Text>
-              </View>
             </View>
             <View
               style={{
-                borderBottomColor: "#B5B5B5",
-                borderBottomWidth: 2,
-                marginHorizontal: 140,
-                marginTop: 40,
+                borderLeftWidth: 2,
+                borderLeftColor: colors.primary,
+                height: 30,
+                marginLeft: 27,
               }}
             ></View>
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "space-evenly",
-                paddingVertical: 20,
+                paddingHorizontal: 20,
+                alignItems: "center",
               }}
             >
-              <View>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    color: "black",
-                    textAlign: "center",
-                  }}
-                >
-                  12 km
-                </Text>
-                <Text>Delivery distance</Text>
-              </View>
-              <View>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    color: "black",
-                    textAlign: "center",
-                  }}
-                >
-                  10 mins
-                </Text>
-                <Text>Delivery time</Text>
-              </View>
-            </View>
-
-            <View style={{ alignItems: "center", paddingTop: 20 }}>
-              <Text
-                style={{
-                  color: colors.secondary,
-                  fontSize: 24,
-                  fontWeight: "bold",
-                }}
-              >
-                $ 250.00
+              <MaterialCommunityIcons
+                name="square"
+                color={colors.secondary}
+                size={18}
+                style={{ paddingTop: 5 }}
+              />
+              <Text style={{ color: "black", paddingLeft: 20 }}>
+                Bestia Resturant La, Street 121,
               </Text>
-              <Text style={{}}>Payment has been deducted</Text>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: colors.secondary,
-                  width: "40%",
-                  padding: 5,
-                  borderRadius: 20,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: 30,
-                }}
-              >
-                <Text style={{ color: "white" }}>Rate your ride</Text>
-              </TouchableOpacity>
             </View>
           </View>
+          <View
+            style={{
+              borderBottomColor: "#B5B5B5",
+              borderBottomWidth: 2,
+              marginHorizontal: 160,
+              marginTop: 40,
+            }}
+          ></View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              paddingVertical: 20,
+            }}
+          >
+            <View>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color: "black",
+                  textAlign: "center",
+                }}
+              >
+                12 km
+              </Text>
+              <Text>Delivery distance</Text>
+            </View>
+            <View>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color: "black",
+                  textAlign: "center",
+                }}
+              >
+                10 mins
+              </Text>
+              <Text>Delivery time</Text>
+            </View>
+          </View>
+
+          <View style={{ alignItems: "center", paddingTop: 20 }}>
+            <Text
+              style={{
+                color: colors.secondary,
+                fontSize: 24,
+                fontWeight: "bold",
+              }}
+            >
+              $ 250.00
+            </Text>
+            <Text style={{ color: "#B5B5B5" }}>Payment has been added </Text>
+            <TouchableOpacity
+              style={{
+                backgroundColor: colors.secondary,
+                width: "40%",
+                padding: 5,
+                borderRadius: 20,
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 30,
+              }}
+            >
+              <Text style={{ color: "white" }}>Rate your ride</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         </View>
       </Modal>
       <BottomTab />

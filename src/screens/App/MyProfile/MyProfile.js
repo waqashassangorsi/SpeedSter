@@ -5,6 +5,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Header, Badge} from 'react-native-elements';
@@ -98,7 +99,7 @@ const MyProfile = ({}) => {
           />
         }
       />
-      <Badge
+      {/* <Badge
         size={100}
         status="warning"
         value="1"
@@ -109,12 +110,12 @@ const MyProfile = ({}) => {
           scaleX: 0.6,
           scaleY: 0.6,
         }}
-      />
+      /> */}
 
       <View
         style={{
           alignItems: 'center',
-          marginVertical: 10,
+          marginVertical:Platform.OS=="ios"?20: 10,
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
           My Profile
@@ -148,7 +149,7 @@ const MyProfile = ({}) => {
           <TouchableOpacity
             onPress={() => chooseFile()}
             style={{
-              width: '12%',
+              width:Platform.OS=="ios"?"10%": '12%',
               backgroundColor: colors.secondary,
               shadowColor: '#000',
               shadowOffset: {
@@ -160,10 +161,10 @@ const MyProfile = ({}) => {
               elevation: 2,
               paddingLeft: 5,
               height: 42,
-              borderRadius: 40,
+              borderRadius:Platform.OS=="ios"?43: 40,
               position: 'absolute',
-              top: 85,
-              right: 125,
+              top:Platform.OS=="ios"?80: 85,
+              right:Platform.OS=="ios"?135: 125,
             }}>
             <MaterialIcons
               name={'edit'}
